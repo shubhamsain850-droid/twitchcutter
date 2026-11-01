@@ -43,50 +43,50 @@ COMMON_CSS = """
       top: -120px;
       left: 50%;
       transform: translateX(-50%);
-      width: 700px;
-      height: 450px;
+      width: 750px;
+      height: 480px;
       background: radial-gradient(circle, rgba(145, 70, 255, 0.18) 0%, rgba(14, 14, 16, 0) 70%);
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Responsive Header */
+    /* DESKTOP HEADER */
     header {
       position: relative;
       z-index: 100;
       border-bottom: 1px solid var(--card-border);
       background: rgba(14, 14, 16, 0.92);
       backdrop-filter: blur(12px);
-      padding: 0.85rem 1.5rem;
+      padding: 0.9rem 2rem;
     }
 
     .header-container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
+      gap: 2rem;
       width: 100%;
     }
 
     .header-main {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 1rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.65rem;
+      gap: 0.75rem;
       text-decoration: none;
       color: #fff;
     }
 
     .brand-icon {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       background: transparent;
       border-radius: 10px;
       display: flex;
@@ -101,10 +101,10 @@ COMMON_CSS = """
       filter: drop-shadow(0 0 16px var(--accent-glow));
     }
 
-    .brand-icon svg { width: 36px; height: 36px; }
+    .brand-icon svg { width: 38px; height: 38px; }
 
     .brand-name {
-      font-size: 1.3rem;
+      font-size: 1.35rem;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
@@ -112,13 +112,13 @@ COMMON_CSS = """
     .brand-name span { color: var(--accent); }
 
     .header-badge {
-      font-size: 0.7rem;
+      font-size: 0.72rem;
       font-weight: 700;
       text-transform: uppercase;
       background: rgba(145, 70, 255, 0.15);
       color: #bf94ff;
       border: 1px solid rgba(145, 70, 255, 0.3);
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 999px;
       white-space: nowrap;
     }
@@ -126,13 +126,13 @@ COMMON_CSS = """
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
     }
 
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       font-weight: 600;
       transition: color 0.15s ease;
       white-space: nowrap;
@@ -146,38 +146,38 @@ COMMON_CSS = """
       position: relative;
       z-index: 1;
       flex: 1;
-      max-width: 960px;
+      max-width: 980px;
       width: 100%;
       margin: 0 auto;
-      padding: 2.5rem 1.25rem;
+      padding: 3rem 1.5rem;
     }
 
     /* Hero */
     .hero {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      padding: 0.35rem 0.9rem;
+      padding: 0.35rem 0.95rem;
       background: rgba(145, 70, 255, 0.12);
       border: 1px solid rgba(145, 70, 255, 0.25);
       border-radius: 999px;
       color: #c8a2ff;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
     .hero h1 {
-      font-size: 2.5rem;
+      font-size: 2.75rem;
       font-weight: 800;
       letter-spacing: -1px;
-      line-height: 1.2;
-      margin-bottom: 0.85rem;
+      line-height: 1.18;
+      margin-bottom: 1rem;
       background: linear-gradient(180deg, #ffffff 0%, #adadb8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -191,8 +191,8 @@ COMMON_CSS = """
 
     .hero p {
       color: var(--text-muted);
-      font-size: 1.05rem;
-      max-width: 660px;
+      font-size: 1.08rem;
+      max-width: 680px;
       margin: 0 auto;
     }
 
@@ -203,7 +203,7 @@ COMMON_CSS = """
       border-radius: 18px;
       padding: 1.5rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .input-wrapper {
@@ -222,7 +222,7 @@ COMMON_CSS = """
       font-size: 1rem;
       outline: none;
       transition: all 0.2s ease;
-      min-height: 50px;
+      min-height: 52px;
     }
 
     .url-input:focus {
@@ -235,7 +235,7 @@ COMMON_CSS = """
       color: #fff;
       border: none;
       border-radius: 12px;
-      padding: 0 1.75rem;
+      padding: 0 2rem;
       font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
@@ -245,7 +245,7 @@ COMMON_CSS = """
       gap: 0.6rem;
       transition: all 0.2s ease;
       white-space: nowrap;
-      min-height: 50px;
+      min-height: 52px;
       box-shadow: 0 4px 15px var(--accent-glow);
     }
 
@@ -265,7 +265,7 @@ COMMON_CSS = """
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
       flex-wrap: wrap;
     }
@@ -289,19 +289,19 @@ COMMON_CSS = """
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      padding: 1.75rem;
+      margin-bottom: 2.5rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .video-info-header {
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
     }
 
     .video-title {
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 700;
-      margin-bottom: 0.35rem;
+      margin-bottom: 0.4rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -310,7 +310,7 @@ COMMON_CSS = """
     .video-meta {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.65rem;
       font-size: 0.85rem;
       color: var(--text-muted);
       flex-wrap: wrap;
@@ -319,7 +319,7 @@ COMMON_CSS = """
     .uploader-badge {
       background: rgba(145, 70, 255, 0.2);
       color: #bf94ff;
-      padding: 0.15rem 0.5rem;
+      padding: 0.15rem 0.55rem;
       border-radius: 4px;
       font-weight: 600;
     }
@@ -327,22 +327,22 @@ COMMON_CSS = """
     .badge-vod {
       background: #27272a;
       color: #e4e4e7;
-      padding: 0.15rem 0.5rem;
+      padding: 0.15rem 0.55rem;
       border-radius: 4px;
       font-size: 0.75rem;
       font-weight: 600;
     }
 
-    /* STRICT 16:9 VIDEO CONTAINER (DESKTOP & MOBILE) */
+    /* 16:9 PREVIEW FRAME (DESKTOP & MOBILE PROPORTIONS) */
     .video-frame-wrapper {
       position: relative;
       width: 100%;
       aspect-ratio: 16 / 9;
       background: #000;
-      border-radius: 12px;
+      border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+      margin-bottom: 1.25rem;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7);
     }
 
     .video-frame-wrapper video {
@@ -365,15 +365,15 @@ COMMON_CSS = """
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       color: var(--text-muted);
       z-index: 5;
     }
 
     .spinner {
-      width: 36px;
-      height: 36px;
-      border: 3px solid rgba(145, 70, 255, 0.2);
+      width: 38px;
+      height: 38px;
+      border: 3.5px solid rgba(145, 70, 255, 0.2);
       border-top-color: var(--accent);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
@@ -383,13 +383,13 @@ COMMON_CSS = """
       to { transform: rotate(360deg); }
     }
 
-    /* Player playback control bar (Seek to Start) */
+    /* Action bar below video player */
     .player-action-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 0.75rem;
-      margin-bottom: 1.25rem;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
 
@@ -398,15 +398,15 @@ COMMON_CSS = """
       color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 0.55rem 1.1rem;
-      font-size: 0.88rem;
+      padding: 0.6rem 1.25rem;
+      font-size: 0.9rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
+      gap: 0.5rem;
       transition: all 0.15s ease;
-      box-shadow: 0 2px 10px rgba(145, 70, 255, 0.3);
+      box-shadow: 0 3px 12px rgba(145, 70, 255, 0.35);
     }
 
     .play-start-btn:hover {
@@ -415,7 +415,7 @@ COMMON_CSS = """
     }
 
     .player-info-hint {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
@@ -424,14 +424,14 @@ COMMON_CSS = """
       background: #111114;
       border: 1px solid var(--card-border);
       border-radius: 14px;
-      padding: 1.25rem;
+      padding: 1.5rem;
     }
 
     .slider-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.25rem;
       flex-wrap: wrap;
       gap: 0.5rem;
     }
@@ -440,21 +440,21 @@ COMMON_CSS = """
       background: rgba(0, 245, 155, 0.12);
       color: var(--green-success);
       border: 1px solid rgba(0, 245, 155, 0.3);
-      padding: 0.25rem 0.75rem;
+      padding: 0.25rem 0.85rem;
       border-radius: 6px;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-family: var(--font-mono);
       font-weight: 600;
     }
 
-    /* TOUCH-FRIENDLY DUAL SLIDER */
+    /* DUAL SLIDER */
     .dual-slider-track-wrap {
       position: relative;
       height: 48px;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1.5rem;
       display: flex;
       align-items: center;
-      padding: 0 4px;
+      padding: 0 6px;
     }
 
     .slider-bg-bar {
@@ -491,8 +491,8 @@ COMMON_CSS = """
       pointer-events: auto;
       -webkit-appearance: none;
       appearance: none;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: #ffffff;
       border: 3.5px solid var(--accent);
@@ -502,15 +502,15 @@ COMMON_CSS = """
       touch-action: none;
     }
 
-    .range-input::-webkit-slider-thumb:hover, .range-input::-webkit-slider-thumb:active {
+    .range-input::-webkit-slider-thumb:hover {
       transform: scale(1.15);
       border-color: #00f59b;
     }
 
     .range-input::-moz-range-thumb {
       pointer-events: auto;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: #ffffff;
       border: 3.5px solid var(--accent);
@@ -521,45 +521,46 @@ COMMON_CSS = """
     .timestamps-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-      margin-bottom: 1.25rem;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
     }
 
     .timestamp-box {
       background: #18181b;
       border: 1px solid var(--card-border);
-      border-radius: 10px;
-      padding: 0.85rem;
+      border-radius: 12px;
+      padding: 1rem;
     }
 
     .timestamp-label {
       display: flex;
       justify-content: space-between;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.6rem;
       font-weight: 600;
     }
 
     .time-input-row {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
+      gap: 0.45rem;
     }
 
     .time-input {
       flex: 1;
       background: #0e0e10;
       border: 1px solid var(--card-border);
-      border-radius: 6px;
+      border-radius: 8px;
       color: #fff;
       font-family: var(--font-mono);
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
-      padding: 0.5rem 0.4rem;
+      padding: 0.55rem 0.5rem;
       text-align: center;
       outline: none;
       min-width: 0;
+      transition: border-color 0.15s ease;
     }
 
     .time-input:focus {
@@ -570,9 +571,9 @@ COMMON_CSS = """
       background: #27272a;
       border: 1px solid #3f3f46;
       color: #e4e4e7;
-      border-radius: 6px;
-      padding: 0.45rem 0.6rem;
-      font-size: 0.75rem;
+      border-radius: 8px;
+      padding: 0.5rem 0.65rem;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -587,8 +588,8 @@ COMMON_CSS = """
 
     .quick-lengths-wrap {
       display: flex;
-      gap: 0.45rem;
-      margin-bottom: 1.25rem;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
       align-items: center;
     }
@@ -598,8 +599,8 @@ COMMON_CSS = """
       border: 1px solid var(--card-border);
       color: var(--text-muted);
       border-radius: 999px;
-      padding: 0.3rem 0.75rem;
-      font-size: 0.8rem;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -611,35 +612,36 @@ COMMON_CSS = """
       color: #fff;
     }
 
+    /* ACTION ROW ON DESKTOP: PROPORTIONATE & BALANCED */
     .action-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
-      padding-top: 0.5rem;
+      gap: 1.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .quality-select-wrapper {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      font-size: 0.88rem;
+      gap: 0.75rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
-      flex: 1;
     }
 
     .quality-select {
-      flex: 1;
       background: #18181b;
       border: 1px solid var(--card-border);
       color: #fff;
-      padding: 0.65rem 0.85rem;
-      border-radius: 8px;
-      font-size: 0.9rem;
+      padding: 0.65rem 1rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
       outline: none;
       cursor: pointer;
-      min-height: 46px;
+      min-height: 48px;
+      min-width: 280px;
+      max-width: 360px;
     }
 
     .cut-btn {
@@ -647,17 +649,18 @@ COMMON_CSS = """
       color: #0e0e10;
       border: none;
       border-radius: 10px;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
+      padding: 0.85rem 2.25rem;
+      font-size: 1.05rem;
       font-weight: 800;
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.55rem;
+      gap: 0.6rem;
       transition: all 0.2s ease;
       box-shadow: 0 4px 15px rgba(0, 245, 155, 0.3);
       min-height: 48px;
+      white-space: nowrap;
     }
 
     .cut-btn:hover {
@@ -671,14 +674,14 @@ COMMON_CSS = """
       transform: none;
     }
 
-    /* REAL-TIME PERCENTAGE PROGRESS CARD */
+    /* REAL-TIME PROGRESS CARD */
     .progress-card {
       display: none;
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
+      padding: 1.75rem;
+      margin-bottom: 2.5rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
@@ -691,7 +694,7 @@ COMMON_CSS = """
     }
 
     .progress-title {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
     }
 
@@ -699,10 +702,10 @@ COMMON_CSS = """
       background: rgba(0, 245, 155, 0.15);
       color: var(--green-success);
       border: 1px solid rgba(0, 245, 155, 0.35);
-      padding: 0.25rem 0.75rem;
+      padding: 0.25rem 0.85rem;
       border-radius: 999px;
       font-family: var(--font-mono);
-      font-size: 1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       white-space: nowrap;
     }
@@ -727,7 +730,7 @@ COMMON_CSS = """
     .progress-meta {
       display: flex;
       justify-content: space-between;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       font-family: var(--font-mono);
       margin-bottom: 1.25rem;
@@ -741,7 +744,7 @@ COMMON_CSS = """
       text-align: center;
       padding: 1rem;
       border-radius: 10px;
-      font-size: 1.05rem;
+      font-size: 1.1rem;
       font-weight: 800;
       text-decoration: none;
       transition: all 0.2s ease;
@@ -759,7 +762,7 @@ COMMON_CSS = """
     }
 
     .section-title {
-      font-size: 1.75rem;
+      font-size: 1.85rem;
       font-weight: 800;
       text-align: center;
       margin-bottom: 0.5rem;
@@ -771,15 +774,15 @@ COMMON_CSS = """
     .section-subtitle {
       text-align: center;
       color: var(--text-muted);
-      font-size: 0.95rem;
-      max-width: 600px;
-      margin: 0 auto 2rem;
+      font-size: 0.98rem;
+      max-width: 620px;
+      margin: 0 auto 2.25rem;
     }
 
     .steps-grid, .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
     }
 
     .step-card, .feature-card {
@@ -790,9 +793,14 @@ COMMON_CSS = """
       transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
+    .feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(145, 70, 255, 0.4);
+    }
+
     .step-num {
-      width: 36px;
-      height: 36px;
+      width: 38px;
+      height: 38px;
       background: rgba(145, 70, 255, 0.2);
       color: #bf94ff;
       border: 1px solid rgba(145, 70, 255, 0.4);
@@ -801,24 +809,24 @@ COMMON_CSS = """
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       margin-bottom: 1rem;
     }
 
     .feature-icon {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 0.85rem;
     }
 
     .step-card h3, .feature-card h3 {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       color: #fff;
     }
 
     .step-card p, .feature-card p {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
@@ -826,7 +834,7 @@ COMMON_CSS = """
     /* FAQ Tabs */
     .faq-tabs {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.6rem;
       margin-bottom: 1.5rem;
       flex-wrap: wrap;
       justify-content: center;
@@ -836,9 +844,9 @@ COMMON_CSS = """
       background: #18181b;
       border: 1px solid var(--card-border);
       color: var(--text-muted);
-      padding: 0.6rem 1.1rem;
+      padding: 0.65rem 1.25rem;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
@@ -858,7 +866,7 @@ COMMON_CSS = """
     .faq-pane {
       display: none;
       flex-direction: column;
-      gap: 0.75rem;
+      gap: 0.85rem;
     }
 
     .faq-pane.active {
@@ -878,9 +886,9 @@ COMMON_CSS = """
     }
 
     .faq-q {
-      padding: 1.1rem 1.25rem;
+      padding: 1.15rem 1.35rem;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -897,12 +905,12 @@ COMMON_CSS = """
 
     .faq-a {
       display: none;
-      padding: 0 1.25rem 1.1rem;
-      font-size: 0.88rem;
+      padding: 0 1.35rem 1.25rem;
+      font-size: 0.9rem;
       color: var(--text-muted);
       line-height: 1.65;
       border-top: 1px solid rgba(255,255,255,0.03);
-      padding-top: 0.75rem;
+      padding-top: 0.85rem;
     }
 
     /* SEO Article */
@@ -910,36 +918,36 @@ COMMON_CSS = """
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 2.25rem 2rem;
+      padding: 2.5rem 2.25rem;
       margin-bottom: 3.5rem;
     }
 
     .seo-article h2 {
-      font-size: 1.55rem;
+      font-size: 1.65rem;
       font-weight: 800;
       margin-bottom: 1rem;
       color: #fff;
     }
 
     .seo-article h3 {
-      font-size: 1.15rem;
+      font-size: 1.2rem;
       font-weight: 700;
       margin: 1.5rem 0 0.5rem;
       color: #bf94ff;
     }
 
     .seo-article p {
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       color: var(--text-muted);
       line-height: 1.75;
-      margin-bottom: 0.85rem;
+      margin-bottom: 0.9rem;
     }
 
     .seo-article ul, .seo-article ol {
       margin-left: 1.5rem;
       margin-bottom: 1rem;
       color: var(--text-muted);
-      font-size: 0.92rem;
+      font-size: 0.94rem;
       line-height: 1.7;
     }
 
@@ -947,7 +955,7 @@ COMMON_CSS = """
     footer {
       border-top: 1px solid var(--card-border);
       background: #09090b;
-      padding: 2.5rem 1.5rem;
+      padding: 2.5rem 2rem;
       text-align: center;
       position: relative;
       z-index: 10;
@@ -956,7 +964,7 @@ COMMON_CSS = """
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 1.25rem;
+      gap: 1.5rem;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
@@ -964,7 +972,7 @@ COMMON_CSS = """
     .footer-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       transition: color 0.15s ease;
     }
 
@@ -978,7 +986,7 @@ COMMON_CSS = """
     }
 
     /* ==============================================================================
-       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px & < 480px)
+       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px ONLY - DESKTOP UNTOUCHED)
        ============================================================================== */
     @media (max-width: 768px) {
       header {
@@ -1057,6 +1065,8 @@ COMMON_CSS = """
       }
       .quality-select {
         width: 100%;
+        max-width: 100%;
+        min-width: 0;
       }
       .cut-btn {
         width: 100%;
@@ -1085,4 +1095,4 @@ COMMON_CSS = """
     }
 """
 
-print("Responsive CSS loaded.")
+print("Refined CSS for desktop and mobile loaded.")
