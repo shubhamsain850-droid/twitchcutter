@@ -407,3 +407,4 @@ vod_downloader_html = f"""<!DOCTYPE html>
 with open(os.path.join(BASE_DIR, "twitch-vod-downloader.html"), "w", encoding="utf-8") as f:
     f.write(vod_downloader_html)
 print("twitch-vod-downloader.html created.")
+

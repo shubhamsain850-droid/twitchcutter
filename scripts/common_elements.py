@@ -42,13 +42,16 @@ LOGO_SVG = """<svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000
 </svg>"""
 
 HEADER_HTML = f"""<header>
-  <div style="display:flex; align-items:center; gap: 2rem; flex-wrap: wrap;">
-    <a href="/" class="brand">
-      <div class="brand-icon">
-        {LOGO_SVG}
-      </div>
-      <div class="brand-name">Twitch<span>Cutter</span></div>
-    </a>
+  <div class="header-container">
+    <div class="header-main">
+      <a href="/" class="brand">
+        <div class="brand-icon">
+          {LOGO_SVG}
+        </div>
+        <div class="brand-name">Twitch<span>Cutter</span></div>
+      </a>
+      <span class="header-badge">Ultra-Fast Clipper</span>
+    </div>
     <nav class="nav-links">
       <a href="/">Home</a>
       <a href="/twitch-clip-cutter">Clip Cutter</a>
@@ -57,7 +60,6 @@ HEADER_HTML = f"""<header>
       <a href="/blog/">Guides</a>
     </nav>
   </div>
-  <span class="header-badge">Ultra-Fast Clipper</span>
 </header>"""
 
 FOOTER_HTML = """<footer>

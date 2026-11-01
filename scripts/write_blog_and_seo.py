@@ -483,3 +483,4 @@ Sitemap: https://twitchcutter.pages.dev/sitemap.xml
 with open(os.path.join(BASE_DIR, "robots.txt"), "w", encoding="utf-8") as f:
     f.write(robots_txt)
 print("robots.txt created.")
+

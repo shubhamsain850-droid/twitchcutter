@@ -1,12 +1,5 @@
 import os
 
-OUT_DIR = r"c:\Users\ss\.gemini\antigravity\scratch\twitchcutter\frontend"
-BLOG_DIR = os.path.join(OUT_DIR, "blog")
-os.makedirs(BLOG_DIR, exist_ok=True)
-
-from common_elements import LOGO_SVG, HEADER_HTML, FOOTER_HTML, FAVICON_HEAD
-from build_full_site import COMMON_CSS
-
 TOOL_JS = """
     const API = window.location.origin.includes("localhost") || window.location.origin.includes("127.0.0.1")
       ? "http://127.0.0.1:7860"
@@ -16,6 +9,7 @@ TOOL_JS = """
     let hlsInstance = null;
     let activeJobId = null;
     let pollInterval = null;
+    let isSeekingFromCode = false;
 
     function switchFaqTab(tabId, btn) {
       document.querySelectorAll('.faq-tab-btn').forEach(b => b.classList.remove('active'));
@@ -66,7 +60,54 @@ TOOL_JS = """
     const selectedDurationBadge = document.getElementById('selectedDurationBadge');
     const previewVideo = document.getElementById('previewVideo');
 
-    function updateSliderUi() {
+    // SEEK VIDEO DIRECTLY TO START TIMESTAMP
+    function seekToTime(sec) {
+      if (!previewVideo) return;
+      isSeekingFromCode = true;
+      try {
+        previewVideo.currentTime = sec;
+      } catch (e) {
+        console.warn('Seek error:', e);
+      }
+      setTimeout(() => { isSeekingFromCode = false; }, 120);
+    }
+
+    function seekToStart() {
+      const sVal = Number(rangeStart.value) || 0;
+      seekToTime(sVal);
+    }
+
+    function playFromStart() {
+      if (!previewVideo) return;
+      const sVal = Number(rangeStart.value) || 0;
+      seekToTime(sVal);
+      previewVideo.play().catch(e => console.log('Playback error:', e));
+    }
+
+    // Video Player Event Listeners to ensure video plays from selected start point
+    if (previewVideo) {
+      previewVideo.addEventListener('play', () => {
+        const sVal = Number(rangeStart.value) || 0;
+        const eVal = Number(rangeEnd.value) || totalVideoDuration;
+        // If current video playback is outside the selected clip range, jump straight to start
+        if (previewVideo.currentTime < sVal - 0.5 || previewVideo.currentTime >= eVal - 0.5) {
+          seekToTime(sVal);
+        }
+      });
+
+      previewVideo.addEventListener('timeupdate', () => {
+        if (isSeekingFromCode) return;
+        const sVal = Number(rangeStart.value) || 0;
+        const eVal = Number(rangeEnd.value) || totalVideoDuration;
+        // When video reaches end of selected clip, automatically loop back to start
+        if (eVal > sVal && previewVideo.currentTime >= eVal) {
+          previewVideo.pause();
+          seekToTime(sVal);
+        }
+      });
+    }
+
+    function updateSliderUi(shouldSeek = false) {
       if (!rangeStart || !rangeEnd) return;
       const max = Number(rangeEnd.max) || totalVideoDuration;
       let sVal = Number(rangeStart.value);
@@ -103,6 +144,10 @@ TOOL_JS = """
       const labelE = document.getElementById('sliderLabelEnd');
       if (labelS) labelS.textContent = startFormatted;
       if (labelE) labelE.textContent = endFormatted;
+
+      if (shouldSeek) {
+        seekToTime(sVal);
+      }
     }
 
     if (rangeStart && rangeEnd) {
@@ -113,8 +158,7 @@ TOOL_JS = """
           sVal = Math.max(0, eVal - 1);
           rangeStart.value = sVal;
         }
-        updateSliderUi();
-        if (previewVideo) previewVideo.currentTime = sVal;
+        updateSliderUi(true); // Seek preview to start timestamp immediately
       });
 
       rangeEnd.addEventListener('input', () => {
@@ -124,7 +168,7 @@ TOOL_JS = """
           eVal = Math.min(Number(rangeEnd.max), sVal + 1);
           rangeEnd.value = eVal;
         }
-        updateSliderUi();
+        updateSliderUi(false);
       });
     }
 
@@ -132,7 +176,7 @@ TOOL_JS = """
       startTimeInput.addEventListener('change', () => {
         const sec = timeToSec(startTimeInput.value);
         if (rangeStart) rangeStart.value = Math.min(sec, Number(rangeEnd.value) - 1);
-        updateSliderUi();
+        updateSliderUi(true); // Seek to new start
       });
     }
 
@@ -140,7 +184,7 @@ TOOL_JS = """
       endTimeInput.addEventListener('change', () => {
         const sec = timeToSec(endTimeInput.value);
         if (rangeEnd) rangeEnd.value = Math.max(sec, Number(rangeStart.value) + 1);
-        updateSliderUi();
+        updateSliderUi(false);
       });
     }
 
@@ -149,20 +193,20 @@ TOOL_JS = """
         let cur = timeToSec(startTimeInput.value) + delta;
         cur = Math.max(0, Math.min(cur, timeToSec(endTimeInput.value) - 1));
         if (rangeStart) rangeStart.value = cur;
-        if (previewVideo) previewVideo.currentTime = cur;
+        updateSliderUi(true); // Seek to start
       } else {
         let cur = timeToSec(endTimeInput.value) + delta;
         cur = Math.min(totalVideoDuration, Math.max(cur, timeToSec(startTimeInput.value) + 1));
         if (rangeEnd) rangeEnd.value = cur;
+        updateSliderUi(false);
       }
-      updateSliderUi();
     }
 
     function quickAdd(seconds) {
       const curStart = timeToSec(startTimeInput.value);
       const newEnd = Math.min(totalVideoDuration, curStart + seconds);
       if (rangeEnd) rangeEnd.value = newEnd;
-      updateSliderUi();
+      updateSliderUi(false);
     }
 
     function showSpinner() {
@@ -205,7 +249,7 @@ TOOL_JS = """
           document.getElementById('videoTitle').textContent = data.title || 'Twitch Stream';
           document.getElementById('videoCreator').textContent = data.uploader || 'Twitch Channel';
 
-          totalVideoDuration = data.duration_seconds || 3600;
+          totalVideoDuration = data.duration_seconds || data.duration || 3600;
           document.getElementById('videoDuration').textContent = secToTime(totalVideoDuration);
 
           const badge = document.getElementById('videoTypeBadge');
@@ -219,41 +263,69 @@ TOOL_JS = """
             badge.style.color = '#e4e4e7';
           }
 
+          // CONFIGURE RANGE SLIDER DURATION
           if (rangeStart && rangeEnd) {
             rangeStart.max = totalVideoDuration;
             rangeEnd.max = totalVideoDuration;
             rangeStart.value = 0;
             const initialClip = Math.min(60, totalVideoDuration);
             rangeEnd.value = initialClip;
-            updateSliderUi();
+            updateSliderUi(false);
           }
 
+          // DYNAMICALLY POPULATE ALL AVAILABLE RESOLUTIONS
           const qSelect = document.getElementById('qualitySelect');
-          if (qSelect && data.formats && data.formats.length > 0) {
+          if (qSelect) {
             qSelect.innerHTML = '';
-            data.formats.forEach(f => {
+            const resList = (data.available_resolutions && data.available_resolutions.length > 0)
+              ? data.available_resolutions
+              : (data.formats && data.formats.length > 0)
+                ? data.formats.map(f => ({
+                    id: f.format_id || f.resolution || 'best',
+                    label: `${f.format_note || f.resolution || 'Source'} (${f.ext || 'mp4'})`
+                  }))
+                : [
+                    { id: 'best', label: 'Best Available Source (Original)' },
+                    { id: '1080p', label: '1080p60 Full HD' },
+                    { id: '720p', label: '720p60 HD' },
+                    { id: '480p', label: '480p SD' },
+                    { id: '360p', label: '360p' }
+                  ];
+
+            resList.forEach((r, idx) => {
               const opt = document.createElement('option');
-              opt.value = f.format_id;
-              opt.textContent = `${f.format_note || f.resolution} (${f.ext})`;
+              opt.value = r.id || r.format_id || 'best';
+              const cleanLabel = r.label.startsWith('⚡') ? r.label : `⚡ ${r.label}`;
+              opt.textContent = cleanLabel;
+              if (idx === 0 || r.id === 'best' || r.id.includes('1080')) {
+                opt.selected = true;
+              }
               qSelect.appendChild(opt);
             });
           }
 
+          // INITIALIZE HLS 16:9 PREVIEW VIDEO
           if (data.preview_url && previewVideo) {
             if (hlsInstance) {
               hlsInstance.destroy();
               hlsInstance = null;
             }
 
+            const onVideoReady = () => {
+              hideSpinner();
+              // Seek video to initial start timestamp (0)
+              seekToTime(0);
+            };
+
             if (Hls.isSupported() && data.preview_url.includes('.m3u8')) {
               hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
               hlsInstance.loadSource(data.preview_url);
               hlsInstance.attachMedia(previewVideo);
-              hlsInstance.on(Hls.Events.MANIFEST_PARSED, hideSpinner);
+              hlsInstance.on(Hls.Events.MANIFEST_PARSED, onVideoReady);
               hlsInstance.on(Hls.Events.ERROR, hideSpinner);
             } else {
               previewVideo.src = data.preview_url;
-              previewVideo.onloadeddata = hideSpinner;
+              previewVideo.onloadeddata = onVideoReady;
               setTimeout(hideSpinner, 3000);
             }
           } else {
@@ -274,11 +346,17 @@ TOOL_JS = """
       }
     }
 
+    // CLIPPING JOB WITH REAL-TIME PERCENTAGE TRACKING
     async function startClipping() {
       const url = document.getElementById('urlInput').value.trim();
       const start = document.getElementById('startTime').value.trim();
       const end = document.getElementById('endTime').value.trim();
       const quality = document.getElementById('qualitySelect').value;
+
+      if (timeToSec(end) <= timeToSec(start)) {
+        alert('End timestamp must be greater than start timestamp.');
+        return;
+      }
 
       const cutBtn = document.getElementById('cutBtn');
       cutBtn.disabled = true;
@@ -286,13 +364,15 @@ TOOL_JS = """
       const progressCard = document.getElementById('progressCard');
       const progressBar = document.getElementById('progressBarFill');
       const progressPercent = document.getElementById('progressPercentage');
+      const percentBadge = document.getElementById('percentBadge');
       const progressMsg = document.getElementById('progressMessage');
       const downloadBtn = document.getElementById('downloadBtn');
 
       progressCard.style.display = 'block';
       progressBar.style.width = '5%';
       progressPercent.textContent = '5%';
-      progressMsg.textContent = 'Queuing clipping job...';
+      if (percentBadge) percentBadge.textContent = '5%';
+      progressMsg.textContent = 'Connecting to cloud video slicer...';
       downloadBtn.style.display = 'none';
       progressCard.scrollIntoView({ behavior: 'smooth' });
 
@@ -326,15 +406,24 @@ TOOL_JS = """
           const data = await resp.json();
 
           if (resp.ok) {
-            const pct = Math.max(5, Math.min(100, data.progress || 0));
+            const rawPct = data.progress || 0;
+            const pct = Math.max(5, Math.min(100, Math.round(rawPct)));
+            
             document.getElementById('progressBarFill').style.width = `${pct}%`;
-            document.getElementById('progressPercentage').textContent = `${Math.round(pct)}%`;
-            document.getElementById('progressMessage').textContent = data.message || 'Processing...';
+            document.getElementById('progressPercentage').textContent = `${pct}%`;
+            const pBadge = document.getElementById('percentBadge');
+            if (pBadge) pBadge.textContent = `${pct}%`;
+            document.getElementById('progressMessage').textContent = data.message || `Slicing stream segments... ${pct}%`;
 
             if (data.status === 'done' || data.status === 'completed') {
               clearInterval(pollInterval);
               document.getElementById('cutBtn').disabled = false;
-              document.getElementById('progressTitle').textContent = '🎉 Clip Ready!';
+              document.getElementById('progressBarFill').style.width = '100%';
+              document.getElementById('progressPercentage').textContent = '100%';
+              if (pBadge) pBadge.textContent = '100%';
+              document.getElementById('progressTitle').textContent = '🎉 100% Complete! Clip Ready';
+              document.getElementById('progressMessage').textContent = 'Clip generated successfully!';
+
               const dl = document.getElementById('downloadBtn');
               dl.href = `${API}${data.download_url}`;
               const size = (data.meta && data.meta.size_mb) || data.size_mb || '';
@@ -342,18 +431,18 @@ TOOL_JS = """
                 const sEl = document.getElementById('downloadSize');
                 if (sEl) sEl.textContent = `${size} MB`;
               }
-              dl.style.display = 'inline-block';
+              dl.style.display = 'block';
             } else if (data.status === 'error') {
               clearInterval(pollInterval);
               document.getElementById('cutBtn').disabled = false;
-              alert('Clipping error: ' + (data.message || 'Unknown error.'));
+              alert('Clipping error: ' + (data.message || 'Unknown error occurred.'));
             }
           }
         } catch (e) {
           console.error('Polling error:', e);
         }
-      } , 1500);
+      }, 1500);
     }
 """
 
-print("Tool JS template ready.")
+print("generate_all.py TOOL_JS updated.")

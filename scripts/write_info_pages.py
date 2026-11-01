@@ -468,3 +468,4 @@ not_found_html = f"""<!DOCTYPE html>
 with open(os.path.join(BASE_DIR, "404.html"), "w", encoding="utf-8") as f:
     f.write(not_found_html)
 print("404.html created.")
+

@@ -83,3 +83,4 @@ COMMON_FOOTER = '''<footer>
 </footer>'''
 
 print("Building pages...")
+

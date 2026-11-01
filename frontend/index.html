@@ -167,6 +167,7 @@
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     .ambient-glow {
@@ -181,29 +182,43 @@
       z-index: 0;
     }
 
+    /* Responsive Header */
     header {
       position: relative;
-      z-index: 10;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 2rem;
+      z-index: 100;
       border-bottom: 1px solid var(--card-border);
-      background: rgba(14, 14, 16, 0.88);
+      background: rgba(14, 14, 16, 0.92);
       backdrop-filter: blur(12px);
+      padding: 0.85rem 1.5rem;
+    }
+
+    .header-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      width: 100%;
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.65rem;
       text-decoration: none;
       color: #fff;
     }
 
     .brand-icon {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       background: transparent;
       border-radius: 10px;
       display: flex;
@@ -218,15 +233,27 @@
       filter: drop-shadow(0 0 16px var(--accent-glow));
     }
 
-    .brand-icon svg { width: 38px; height: 38px; }
+    .brand-icon svg { width: 36px; height: 36px; }
 
     .brand-name {
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 800;
       letter-spacing: -0.5px;
     }
 
     .brand-name span { color: var(--accent); }
+
+    .header-badge {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(145, 70, 255, 0.15);
+      color: #bf94ff;
+      border: 1px solid rgba(145, 70, 255, 0.3);
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
 
     .nav-links {
       display: flex;
@@ -237,24 +264,14 @@
     .nav-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       font-weight: 600;
       transition: color 0.15s ease;
+      white-space: nowrap;
     }
 
     .nav-links a:hover, .nav-links a.active {
       color: #fff;
-    }
-
-    .header-badge {
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      background: rgba(145, 70, 255, 0.15);
-      color: #bf94ff;
-      border: 1px solid rgba(145, 70, 255, 0.3);
-      padding: 0.25rem 0.65rem;
-      border-radius: 999px;
     }
 
     main {
@@ -264,13 +281,13 @@
       max-width: 960px;
       width: 100%;
       margin: 0 auto;
-      padding: 3rem 1.25rem;
+      padding: 2.5rem 1.25rem;
     }
 
     /* Hero */
     .hero {
       text-align: center;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .hero-pill {
@@ -284,15 +301,15 @@
       color: #c8a2ff;
       font-size: 0.85rem;
       font-weight: 600;
-      margin-bottom: 1.25rem;
+      margin-bottom: 1rem;
     }
 
     .hero h1 {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: -1px;
-      line-height: 1.18;
-      margin-bottom: 1rem;
+      line-height: 1.2;
+      margin-bottom: 0.85rem;
       background: linear-gradient(180deg, #ffffff 0%, #adadb8 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -318,7 +335,7 @@
       border-radius: 18px;
       padding: 1.5rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
     }
 
     .input-wrapper {
@@ -337,6 +354,7 @@
       font-size: 1rem;
       outline: none;
       transition: all 0.2s ease;
+      min-height: 50px;
     }
 
     .url-input:focus {
@@ -355,9 +373,11 @@
       cursor: pointer;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 0.6rem;
       transition: all 0.2s ease;
       white-space: nowrap;
+      min-height: 50px;
       box-shadow: 0 4px 15px var(--accent-glow);
     }
 
@@ -402,7 +422,7 @@
       border: 1px solid var(--card-border);
       border-radius: 18px;
       padding: 1.5rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
@@ -425,6 +445,7 @@
       gap: 0.6rem;
       font-size: 0.85rem;
       color: var(--text-muted);
+      flex-wrap: wrap;
     }
 
     .uploader-badge {
@@ -444,20 +465,24 @@
       font-weight: 600;
     }
 
+    /* STRICT 16:9 VIDEO CONTAINER (DESKTOP & MOBILE) */
     .video-frame-wrapper {
       position: relative;
       width: 100%;
+      aspect-ratio: 16 / 9;
       background: #000;
       border-radius: 12px;
       overflow: hidden;
-      aspect-ratio: 16 / 9;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     }
 
     .video-frame-wrapper video {
       width: 100%;
       height: 100%;
       object-fit: contain;
+      background: #000;
+      display: block;
     }
 
     .video-loading-overlay {
@@ -466,7 +491,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(14, 14, 16, 0.8);
+      background: rgba(14, 14, 16, 0.85);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -490,6 +515,42 @@
       to { transform: rotate(360deg); }
     }
 
+    /* Player playback control bar (Seek to Start) */
+    .player-action-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .play-start-btn {
+      background: linear-gradient(135deg, #bf94ff 0%, #9146ff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: all 0.15s ease;
+      box-shadow: 0 2px 10px rgba(145, 70, 255, 0.3);
+    }
+
+    .play-start-btn:hover {
+      background: linear-gradient(135deg, #d2b3ff 0%, #a25eff 100%);
+      transform: translateY(-1px);
+    }
+
+    .player-info-hint {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
     /* Slider Section */
     .slider-section {
       background: #111114;
@@ -503,25 +564,29 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 1.2rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
     }
 
     .selected-duration-badge {
       background: rgba(0, 245, 155, 0.12);
       color: var(--green-success);
       border: 1px solid rgba(0, 245, 155, 0.3);
-      padding: 0.2rem 0.65rem;
+      padding: 0.25rem 0.75rem;
       border-radius: 6px;
       font-size: 0.85rem;
       font-family: var(--font-mono);
       font-weight: 600;
     }
 
+    /* TOUCH-FRIENDLY DUAL SLIDER */
     .dual-slider-track-wrap {
       position: relative;
-      height: 44px;
+      height: 48px;
       margin-bottom: 1.25rem;
       display: flex;
       align-items: center;
+      padding: 0 4px;
     }
 
     .slider-bg-bar {
@@ -550,26 +615,39 @@
       appearance: none;
       background: transparent;
       outline: none;
-      height: 8px;
+      height: 10px;
+      touch-action: none;
     }
 
     .range-input::-webkit-slider-thumb {
       pointer-events: auto;
       -webkit-appearance: none;
       appearance: none;
-      width: 22px;
-      height: 22px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       background: #ffffff;
-      border: 3px solid var(--accent);
+      border: 3.5px solid var(--accent);
       cursor: ew-resize;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 3px 10px rgba(0,0,0,0.6);
       transition: transform 0.1s ease, border-color 0.1s ease;
+      touch-action: none;
     }
 
-    .range-input::-webkit-slider-thumb:hover {
+    .range-input::-webkit-slider-thumb:hover, .range-input::-webkit-slider-thumb:active {
       transform: scale(1.15);
       border-color: #00f59b;
+    }
+
+    .range-input::-moz-range-thumb {
+      pointer-events: auto;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 3.5px solid var(--accent);
+      cursor: ew-resize;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.6);
     }
 
     .timestamps-grid {
@@ -598,7 +676,7 @@
     .time-input-row {
       display: flex;
       align-items: center;
-      gap: 0.4rem;
+      gap: 0.35rem;
     }
 
     .time-input {
@@ -610,9 +688,10 @@
       font-family: var(--font-mono);
       font-size: 0.95rem;
       font-weight: 600;
-      padding: 0.45rem 0.5rem;
+      padding: 0.5rem 0.4rem;
       text-align: center;
       outline: none;
+      min-width: 0;
     }
 
     .time-input:focus {
@@ -624,15 +703,42 @@
       border: 1px solid #3f3f46;
       color: #e4e4e7;
       border-radius: 6px;
-      padding: 0.4rem 0.55rem;
+      padding: 0.45rem 0.6rem;
       font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+    }
+
+    .nudge-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .quick-lengths-wrap {
+      display: flex;
+      gap: 0.45rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .quick-pill {
+      background: #18181b;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      border-radius: 999px;
+      padding: 0.3rem 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.15s ease;
     }
 
-    .nudge-btn:hover {
-      background: var(--accent);
+    .quick-pill:hover {
+      background: rgba(145, 70, 255, 0.2);
       border-color: var(--accent);
       color: #fff;
     }
@@ -652,17 +758,20 @@
       gap: 0.6rem;
       font-size: 0.88rem;
       color: var(--text-muted);
+      flex: 1;
     }
 
     .quality-select {
+      flex: 1;
       background: #18181b;
       border: 1px solid var(--card-border);
       color: #fff;
-      padding: 0.55rem 0.85rem;
+      padding: 0.65rem 0.85rem;
       border-radius: 8px;
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       outline: none;
       cursor: pointer;
+      min-height: 46px;
     }
 
     .cut-btn {
@@ -670,15 +779,17 @@
       color: #0e0e10;
       border: none;
       border-radius: 10px;
-      padding: 0.75rem 1.75rem;
-      font-size: 0.95rem;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      justify-content: center;
+      gap: 0.55rem;
       transition: all 0.2s ease;
       box-shadow: 0 4px 15px rgba(0, 245, 155, 0.3);
+      min-height: 48px;
     }
 
     .cut-btn:hover {
@@ -692,21 +803,40 @@
       transform: none;
     }
 
-    /* Progress Card */
+    /* REAL-TIME PERCENTAGE PROGRESS CARD */
     .progress-card {
       display: none;
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 18px;
       padding: 1.5rem;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 0.5rem;
     }
 
     .progress-title {
       font-size: 1.15rem;
       font-weight: 700;
-      margin-bottom: 1rem;
+    }
+
+    .percent-badge {
+      background: rgba(0, 245, 155, 0.15);
+      color: var(--green-success);
+      border: 1px solid rgba(0, 245, 155, 0.35);
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .progress-bar-wrap {
@@ -741,7 +871,7 @@
       background: linear-gradient(135deg, #00f59b 0%, #00c77d 100%);
       color: #0e0e10;
       text-align: center;
-      padding: 0.95rem;
+      padding: 1rem;
       border-radius: 10px;
       font-size: 1.05rem;
       font-weight: 800;
@@ -755,8 +885,8 @@
       transform: translateY(-2px);
     }
 
-    /* Steps Section */
-    .steps-section {
+    /* Steps & Features */
+    .steps-section, .features-section, .faq-section {
       margin-bottom: 3.5rem;
     }
 
@@ -778,18 +908,18 @@
       margin: 0 auto 2rem;
     }
 
-    .steps-grid {
+    .steps-grid, .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 1.25rem;
     }
 
-    .step-card {
+    .step-card, .feature-card {
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 1.75rem 1.5rem;
-      position: relative;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .step-num {
@@ -807,66 +937,25 @@
       margin-bottom: 1rem;
     }
 
-    .step-card h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #fff;
-    }
-
-    .step-card p {
-      font-size: 0.88rem;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* Features Section */
-    .features-section {
-      margin-bottom: 3.5rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem;
-    }
-
-    .feature-card {
-      background: var(--bg-card);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 1.75rem 1.5rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(145, 70, 255, 0.4);
-    }
-
     .feature-icon {
       font-size: 2rem;
       margin-bottom: 0.85rem;
     }
 
-    .feature-card h3 {
+    .step-card h3, .feature-card h3 {
       font-size: 1.1rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
       color: #fff;
     }
 
-    .feature-card p {
+    .step-card p, .feature-card p {
       font-size: 0.88rem;
       color: var(--text-muted);
       line-height: 1.6;
     }
 
-    /* FAQ Accordion & Tabs */
-    .faq-section {
-      margin-bottom: 3.5rem;
-    }
-
+    /* FAQ Tabs */
     .faq-tabs {
       display: flex;
       gap: 0.5rem;
@@ -948,7 +1037,7 @@
       padding-top: 0.75rem;
     }
 
-    /* SEO Article Block */
+    /* SEO Article */
     .seo-article {
       background: var(--bg-card);
       border: 1px solid var(--card-border);
@@ -978,7 +1067,7 @@
       margin-bottom: 0.85rem;
     }
 
-    .seo-article ul {
+    .seo-article ul, .seo-article ol {
       margin-left: 1.5rem;
       margin-bottom: 1rem;
       color: var(--text-muted);
@@ -986,15 +1075,11 @@
       line-height: 1.7;
     }
 
-    .seo-article li {
-      margin-bottom: 0.35rem;
-    }
-
     /* Footer */
     footer {
       border-top: 1px solid var(--card-border);
       background: #09090b;
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 1.5rem;
       text-align: center;
       position: relative;
       z-index: 10;
@@ -1003,7 +1088,7 @@
     .footer-links {
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.25rem;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
     }
@@ -1024,32 +1109,110 @@
       font-size: 0.82rem;
     }
 
+    /* ==============================================================================
+       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px & < 480px)
+       ============================================================================== */
     @media (max-width: 768px) {
       header {
-        padding: 1rem;
+        padding: 0.75rem 1rem;
+      }
+      .header-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+      .header-main {
+        justify-content: space-between;
       }
       .nav-links {
-        display: none;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        gap: 0.5rem;
+        padding-bottom: 0.25rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      .nav-links::-webkit-scrollbar { display: none; }
+      .nav-links a {
+        background: #18181b;
+        padding: 0.4rem 0.8rem;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        border: 1px solid var(--card-border);
+      }
+      .nav-links a:hover, .nav-links a.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      main {
+        padding: 1.5rem 0.85rem;
+      }
+      .hero {
+        margin-bottom: 1.5rem;
       }
       .hero h1 {
-        font-size: 2rem;
+        font-size: 1.85rem;
+      }
+      .hero p {
+        font-size: 0.95rem;
+      }
+      .input-card {
+        padding: 1rem;
+        border-radius: 14px;
       }
       .input-wrapper {
         flex-direction: column;
       }
       .fetch-btn {
-        justify-content: center;
-        padding: 0.85rem;
+        width: 100%;
+        min-height: 48px;
+      }
+      .player-card {
+        padding: 1rem;
+        border-radius: 14px;
+      }
+      .slider-section {
+        padding: 1rem 0.75rem;
       }
       .timestamps-grid {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
       }
       .action-row {
         flex-direction: column;
         align-items: stretch;
       }
+      .quality-select-wrapper {
+        width: 100%;
+      }
+      .quality-select {
+        width: 100%;
+      }
       .cut-btn {
-        justify-content: center;
+        width: 100%;
+      }
+      .seo-article {
+        padding: 1.5rem 1.1rem;
+        border-radius: 14px;
+      }
+      .section-title {
+        font-size: 1.45rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.65rem;
+      }
+      .nudge-btn {
+        padding: 0.45rem 0.4rem;
+        font-size: 0.72rem;
+      }
+      .time-input {
+        font-size: 0.88rem;
+        padding: 0.45rem 0.2rem;
       }
     }
 
@@ -1059,10 +1222,11 @@
   <div class="ambient-glow"></div>
 
 <header>
-  <div style="display:flex; align-items:center; gap: 2rem; flex-wrap: wrap;">
-    <a href="/" class="brand">
-      <div class="brand-icon">
-        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="header-container">
+    <div class="header-main">
+      <a href="/" class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="twPurple" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#bf94ff"/>
@@ -1103,9 +1267,11 @@
   <circle cx="43" cy="25" r="1.1" fill="#ffffff"/>
   <path d="M22 31 L23.5 27.5 L25 31 L28.5 32.5 L25 34 L23.5 37.5 L22 34 L18.5 32.5 Z" fill="#00f59b" filter="url(#cutGlow)"/>
 </svg>
-      </div>
-      <div class="brand-name">Twitch<span>Cutter</span></div>
-    </a>
+        </div>
+        <div class="brand-name">Twitch<span>Cutter</span></div>
+      </a>
+      <span class="header-badge">Ultra-Fast Clipper</span>
+    </div>
     <nav class="nav-links">
       <a href="/">Home</a>
       <a href="/twitch-clip-cutter">Clip Cutter</a>
@@ -1114,7 +1280,6 @@
       <a href="/blog/">Guides</a>
     </nav>
   </div>
-  <span class="header-badge">Ultra-Fast Clipper</span>
 </header>
 
   <main>
@@ -1163,12 +1328,28 @@
         </div>
       </div>
 
-      <!-- Player Frame -->
+      <!-- STRICT 16:9 PREVIEW FRAME (MOBILE & DESKTOP) -->
       <div class="video-frame-wrapper">
-        <video id="previewVideo" controls playsinline></video>
+        <video id="previewVideo" controls playsinline preload="metadata"></video>
         <div id="videoLoadingOverlay" class="video-loading-overlay">
           <div class="spinner"></div>
-          <span>Loading Stream Preview...</span>
+          <span>Loading Stream Preview (16:9)...</span>
+        </div>
+      </div>
+
+      <!-- Playback Controls (Play from Start Timestamp) -->
+      <div class="player-action-bar">
+        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+          <button type="button" class="play-start-btn" onclick="playFromStart()">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <span>Play from Start Timestamp</span>
+          </button>
+          <button type="button" class="nudge-btn" onclick="seekToStart()" title="Seek video to start timestamp">
+            <span>↺ Seek to Start</span>
+          </button>
+        </div>
+        <div class="player-info-hint">
+          ⏱️ Video previews starting at your chosen in-point
         </div>
       </div>
 
@@ -1218,21 +1399,22 @@
         </div>
 
         <!-- Quick Length Shortcuts -->
-        <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center;">
+        <div class="quick-lengths-wrap">
           <span style="font-size:0.8rem; color:var(--text-muted);">Quick Add:</span>
-          <button class="nudge-btn" onclick="quickAdd(30)">+30s</button>
-          <button class="nudge-btn" onclick="quickAdd(60)">+1 Min</button>
-          <button class="nudge-btn" onclick="quickAdd(180)">+3 Min</button>
-          <button class="nudge-btn" onclick="quickAdd(300)">+5 Min</button>
-          <button class="nudge-btn" onclick="quickAdd(600)">+10 Min</button>
+          <button type="button" class="quick-pill" onclick="quickAdd(30)">+30s</button>
+          <button type="button" class="quick-pill" onclick="quickAdd(60)">+1 Min</button>
+          <button type="button" class="quick-pill" onclick="quickAdd(180)">+3 Min</button>
+          <button type="button" class="quick-pill" onclick="quickAdd(300)">+5 Min</button>
+          <button type="button" class="quick-pill" onclick="quickAdd(600)">+10 Min</button>
         </div>
 
         <!-- Action & Quality Row -->
         <div class="action-row">
           <div class="quality-select-wrapper">
-            <label for="qualitySelect">Resolution:</label>
+            <label for="qualitySelect" style="white-space:nowrap; font-weight:600;">Resolution:</label>
             <select id="qualitySelect" class="quality-select">
-              <option value="best">⚡ 1080p60 Full HD (Source)</option>
+              <option value="best">⚡ Best Available Source (Original)</option>
+              <option value="1080p">⚡ 1080p60 Full HD</option>
               <option value="720p">⚡ 720p60 HD</option>
               <option value="480p">⚡ 480p SD</option>
               <option value="360p">⚡ 360p</option>
@@ -1247,15 +1429,18 @@
       </div>
     </div>
 
-    <!-- Progress Card -->
+    <!-- Real-Time Percentage Progress Card -->
     <div id="progressCard" class="progress-card">
-      <div id="progressTitle" class="progress-title">Processing Twitch Stream...</div>
+      <div class="progress-header">
+        <div id="progressTitle" class="progress-title">Processing Twitch Stream...</div>
+        <div id="percentBadge" class="percent-badge">0%</div>
+      </div>
       <div class="progress-bar-wrap">
         <div id="progressBarFill" class="progress-bar-fill"></div>
       </div>
       <div class="progress-meta">
         <span id="progressMessage">Connecting to cloud slicer...</span>
-        <span id="progressPercentage">0%</span>
+        <span id="progressPercentage" style="font-weight:700; color:var(--green-success);">0%</span>
       </div>
       <a id="downloadBtn" class="download-btn" href="#" download>
         ⬇️ Download Trimmed MP4 (<span id="downloadSize">0 MB</span>)
@@ -1469,6 +1654,7 @@
     let hlsInstance = null;
     let activeJobId = null;
     let pollInterval = null;
+    let isSeekingFromCode = false;
 
     function switchFaqTab(tabId, btn) {
       document.querySelectorAll('.faq-tab-btn').forEach(b => b.classList.remove('active'));
@@ -1519,7 +1705,54 @@
     const selectedDurationBadge = document.getElementById('selectedDurationBadge');
     const previewVideo = document.getElementById('previewVideo');
 
-    function updateSliderUi() {
+    // SEEK VIDEO DIRECTLY TO START TIMESTAMP
+    function seekToTime(sec) {
+      if (!previewVideo) return;
+      isSeekingFromCode = true;
+      try {
+        previewVideo.currentTime = sec;
+      } catch (e) {
+        console.warn('Seek error:', e);
+      }
+      setTimeout(() => { isSeekingFromCode = false; }, 120);
+    }
+
+    function seekToStart() {
+      const sVal = Number(rangeStart.value) || 0;
+      seekToTime(sVal);
+    }
+
+    function playFromStart() {
+      if (!previewVideo) return;
+      const sVal = Number(rangeStart.value) || 0;
+      seekToTime(sVal);
+      previewVideo.play().catch(e => console.log('Playback error:', e));
+    }
+
+    // Video Player Event Listeners to ensure video plays from selected start point
+    if (previewVideo) {
+      previewVideo.addEventListener('play', () => {
+        const sVal = Number(rangeStart.value) || 0;
+        const eVal = Number(rangeEnd.value) || totalVideoDuration;
+        // If current video playback is outside the selected clip range, jump straight to start
+        if (previewVideo.currentTime < sVal - 0.5 || previewVideo.currentTime >= eVal - 0.5) {
+          seekToTime(sVal);
+        }
+      });
+
+      previewVideo.addEventListener('timeupdate', () => {
+        if (isSeekingFromCode) return;
+        const sVal = Number(rangeStart.value) || 0;
+        const eVal = Number(rangeEnd.value) || totalVideoDuration;
+        // When video reaches end of selected clip, automatically loop back to start
+        if (eVal > sVal && previewVideo.currentTime >= eVal) {
+          previewVideo.pause();
+          seekToTime(sVal);
+        }
+      });
+    }
+
+    function updateSliderUi(shouldSeek = false) {
       if (!rangeStart || !rangeEnd) return;
       const max = Number(rangeEnd.max) || totalVideoDuration;
       let sVal = Number(rangeStart.value);
@@ -1556,6 +1789,10 @@
       const labelE = document.getElementById('sliderLabelEnd');
       if (labelS) labelS.textContent = startFormatted;
       if (labelE) labelE.textContent = endFormatted;
+
+      if (shouldSeek) {
+        seekToTime(sVal);
+      }
     }
 
     if (rangeStart && rangeEnd) {
@@ -1566,8 +1803,7 @@
           sVal = Math.max(0, eVal - 1);
           rangeStart.value = sVal;
         }
-        updateSliderUi();
-        if (previewVideo) previewVideo.currentTime = sVal;
+        updateSliderUi(true); // Seek preview to start timestamp immediately
       });
 
       rangeEnd.addEventListener('input', () => {
@@ -1577,7 +1813,7 @@
           eVal = Math.min(Number(rangeEnd.max), sVal + 1);
           rangeEnd.value = eVal;
         }
-        updateSliderUi();
+        updateSliderUi(false);
       });
     }
 
@@ -1585,7 +1821,7 @@
       startTimeInput.addEventListener('change', () => {
         const sec = timeToSec(startTimeInput.value);
         if (rangeStart) rangeStart.value = Math.min(sec, Number(rangeEnd.value) - 1);
-        updateSliderUi();
+        updateSliderUi(true); // Seek to new start
       });
     }
 
@@ -1593,7 +1829,7 @@
       endTimeInput.addEventListener('change', () => {
         const sec = timeToSec(endTimeInput.value);
         if (rangeEnd) rangeEnd.value = Math.max(sec, Number(rangeStart.value) + 1);
-        updateSliderUi();
+        updateSliderUi(false);
       });
     }
 
@@ -1602,20 +1838,20 @@
         let cur = timeToSec(startTimeInput.value) + delta;
         cur = Math.max(0, Math.min(cur, timeToSec(endTimeInput.value) - 1));
         if (rangeStart) rangeStart.value = cur;
-        if (previewVideo) previewVideo.currentTime = cur;
+        updateSliderUi(true); // Seek to start
       } else {
         let cur = timeToSec(endTimeInput.value) + delta;
         cur = Math.min(totalVideoDuration, Math.max(cur, timeToSec(startTimeInput.value) + 1));
         if (rangeEnd) rangeEnd.value = cur;
+        updateSliderUi(false);
       }
-      updateSliderUi();
     }
 
     function quickAdd(seconds) {
       const curStart = timeToSec(startTimeInput.value);
       const newEnd = Math.min(totalVideoDuration, curStart + seconds);
       if (rangeEnd) rangeEnd.value = newEnd;
-      updateSliderUi();
+      updateSliderUi(false);
     }
 
     function showSpinner() {
@@ -1658,7 +1894,7 @@
           document.getElementById('videoTitle').textContent = data.title || 'Twitch Stream';
           document.getElementById('videoCreator').textContent = data.uploader || 'Twitch Channel';
 
-          totalVideoDuration = data.duration_seconds || 3600;
+          totalVideoDuration = data.duration_seconds || data.duration || 3600;
           document.getElementById('videoDuration').textContent = secToTime(totalVideoDuration);
 
           const badge = document.getElementById('videoTypeBadge');
@@ -1672,41 +1908,69 @@
             badge.style.color = '#e4e4e7';
           }
 
+          // CONFIGURE RANGE SLIDER DURATION
           if (rangeStart && rangeEnd) {
             rangeStart.max = totalVideoDuration;
             rangeEnd.max = totalVideoDuration;
             rangeStart.value = 0;
             const initialClip = Math.min(60, totalVideoDuration);
             rangeEnd.value = initialClip;
-            updateSliderUi();
+            updateSliderUi(false);
           }
 
+          // DYNAMICALLY POPULATE ALL AVAILABLE RESOLUTIONS
           const qSelect = document.getElementById('qualitySelect');
-          if (qSelect && data.formats && data.formats.length > 0) {
+          if (qSelect) {
             qSelect.innerHTML = '';
-            data.formats.forEach(f => {
+            const resList = (data.available_resolutions && data.available_resolutions.length > 0)
+              ? data.available_resolutions
+              : (data.formats && data.formats.length > 0)
+                ? data.formats.map(f => ({
+                    id: f.format_id || f.resolution || 'best',
+                    label: `${f.format_note || f.resolution || 'Source'} (${f.ext || 'mp4'})`
+                  }))
+                : [
+                    { id: 'best', label: 'Best Available Source (Original)' },
+                    { id: '1080p', label: '1080p60 Full HD' },
+                    { id: '720p', label: '720p60 HD' },
+                    { id: '480p', label: '480p SD' },
+                    { id: '360p', label: '360p' }
+                  ];
+
+            resList.forEach((r, idx) => {
               const opt = document.createElement('option');
-              opt.value = f.format_id;
-              opt.textContent = `${f.format_note || f.resolution} (${f.ext})`;
+              opt.value = r.id || r.format_id || 'best';
+              const cleanLabel = r.label.startsWith('⚡') ? r.label : `⚡ ${r.label}`;
+              opt.textContent = cleanLabel;
+              if (idx === 0 || r.id === 'best' || r.id.includes('1080')) {
+                opt.selected = true;
+              }
               qSelect.appendChild(opt);
             });
           }
 
+          // INITIALIZE HLS 16:9 PREVIEW VIDEO
           if (data.preview_url && previewVideo) {
             if (hlsInstance) {
               hlsInstance.destroy();
               hlsInstance = null;
             }
 
+            const onVideoReady = () => {
+              hideSpinner();
+              // Seek video to initial start timestamp (0)
+              seekToTime(0);
+            };
+
             if (Hls.isSupported() && data.preview_url.includes('.m3u8')) {
               hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
               hlsInstance.loadSource(data.preview_url);
               hlsInstance.attachMedia(previewVideo);
-              hlsInstance.on(Hls.Events.MANIFEST_PARSED, hideSpinner);
+              hlsInstance.on(Hls.Events.MANIFEST_PARSED, onVideoReady);
               hlsInstance.on(Hls.Events.ERROR, hideSpinner);
             } else {
               previewVideo.src = data.preview_url;
-              previewVideo.onloadeddata = hideSpinner;
+              previewVideo.onloadeddata = onVideoReady;
               setTimeout(hideSpinner, 3000);
             }
           } else {
@@ -1727,11 +1991,17 @@
       }
     }
 
+    // CLIPPING JOB WITH REAL-TIME PERCENTAGE TRACKING
     async function startClipping() {
       const url = document.getElementById('urlInput').value.trim();
       const start = document.getElementById('startTime').value.trim();
       const end = document.getElementById('endTime').value.trim();
       const quality = document.getElementById('qualitySelect').value;
+
+      if (timeToSec(end) <= timeToSec(start)) {
+        alert('End timestamp must be greater than start timestamp.');
+        return;
+      }
 
       const cutBtn = document.getElementById('cutBtn');
       cutBtn.disabled = true;
@@ -1739,13 +2009,15 @@
       const progressCard = document.getElementById('progressCard');
       const progressBar = document.getElementById('progressBarFill');
       const progressPercent = document.getElementById('progressPercentage');
+      const percentBadge = document.getElementById('percentBadge');
       const progressMsg = document.getElementById('progressMessage');
       const downloadBtn = document.getElementById('downloadBtn');
 
       progressCard.style.display = 'block';
       progressBar.style.width = '5%';
       progressPercent.textContent = '5%';
-      progressMsg.textContent = 'Queuing clipping job...';
+      if (percentBadge) percentBadge.textContent = '5%';
+      progressMsg.textContent = 'Connecting to cloud video slicer...';
       downloadBtn.style.display = 'none';
       progressCard.scrollIntoView({ behavior: 'smooth' });
 
@@ -1779,15 +2051,24 @@
           const data = await resp.json();
 
           if (resp.ok) {
-            const pct = Math.max(5, Math.min(100, data.progress || 0));
+            const rawPct = data.progress || 0;
+            const pct = Math.max(5, Math.min(100, Math.round(rawPct)));
+            
             document.getElementById('progressBarFill').style.width = `${pct}%`;
-            document.getElementById('progressPercentage').textContent = `${Math.round(pct)}%`;
-            document.getElementById('progressMessage').textContent = data.message || 'Processing...';
+            document.getElementById('progressPercentage').textContent = `${pct}%`;
+            const pBadge = document.getElementById('percentBadge');
+            if (pBadge) pBadge.textContent = `${pct}%`;
+            document.getElementById('progressMessage').textContent = data.message || `Slicing stream segments... ${pct}%`;
 
             if (data.status === 'done' || data.status === 'completed') {
               clearInterval(pollInterval);
               document.getElementById('cutBtn').disabled = false;
-              document.getElementById('progressTitle').textContent = '🎉 Clip Ready!';
+              document.getElementById('progressBarFill').style.width = '100%';
+              document.getElementById('progressPercentage').textContent = '100%';
+              if (pBadge) pBadge.textContent = '100%';
+              document.getElementById('progressTitle').textContent = '🎉 100% Complete! Clip Ready';
+              document.getElementById('progressMessage').textContent = 'Clip generated successfully!';
+
               const dl = document.getElementById('downloadBtn');
               dl.href = `${API}${data.download_url}`;
               const size = (data.meta && data.meta.size_mb) || data.size_mb || '';
@@ -1795,17 +2076,17 @@
                 const sEl = document.getElementById('downloadSize');
                 if (sEl) sEl.textContent = `${size} MB`;
               }
-              dl.style.display = 'inline-block';
+              dl.style.display = 'block';
             } else if (data.status === 'error') {
               clearInterval(pollInterval);
               document.getElementById('cutBtn').disabled = false;
-              alert('Clipping error: ' + (data.message || 'Unknown error.'));
+              alert('Clipping error: ' + (data.message || 'Unknown error occurred.'));
             }
           }
         } catch (e) {
           console.error('Polling error:', e);
         }
-      } , 1500);
+      }, 1500);
     }
 
   </script>

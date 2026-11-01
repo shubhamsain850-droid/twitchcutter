@@ -356,3 +356,4 @@ index_html = f"""<!DOCTYPE html>
 with open(os.path.join(BASE_DIR, "index.html"), "w", encoding="utf-8") as f:
     f.write(index_html)
 print("index.html created.")
+
