@@ -29,8 +29,8 @@ def get_tool_html(custom_h1, custom_sub, default_placeholder):
       <div class="quick-examples">
         <span>Try sample:</span>
         <span class="example-tag" onclick="loadSample('https://www.twitch.tv/eslcs')">ESLCS Channel</span>
-        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/shroud')">Shroud Stream</span>
-        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/tarik')">Tarik Stream</span>
+        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/videos/2914038727')">Shroud 8.7h VOD</span>
+        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/videos/2916013156')">ESLCS 23.6h VOD</span>
       </div>
     </div>
 
@@ -49,20 +49,21 @@ def get_tool_html(custom_h1, custom_sub, default_placeholder):
         </div>
       </div>
 
-      <!-- STRICT 16:9 PREVIEW FRAME (MOBILE & DESKTOP) -->
+      <!-- STRICT 16:9 PREVIEW FRAME (Twitch Interactive Player + HTML5 Fallback) -->
       <div class="video-frame-wrapper">
-        <video id="previewVideo" controls playsinline preload="metadata"></video>
+        <div id="twitchPlayerEmbed" style="width:100%; height:100%;"></div>
+        <video id="previewVideo" controls playsinline preload="metadata" style="display:none; width:100%; height:100%;"></video>
         <div id="videoLoadingOverlay" class="video-loading-overlay">
           <div class="spinner"></div>
-          <span>Loading Stream Preview (16:9)...</span>
+          <span id="videoLoadingText">Loading Twitch Stream Player (16:9)...</span>
         </div>
       </div>
 
       <!-- Playback Controls (Play from Start Timestamp) -->
       <div class="player-action-bar">
-        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
           <button type="button" class="play-start-btn" onclick="playFromStart()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <span>Play from Start Timestamp</span>
           </button>
           <button type="button" class="nudge-btn" onclick="seekToStart()" title="Seek video to start timestamp">
@@ -77,8 +78,12 @@ def get_tool_html(custom_h1, custom_sub, default_placeholder):
       <!-- Dual Range Slider Controls -->
       <div class="slider-section">
         <div class="slider-header">
-          <span style="font-weight: 700; font-size: 0.9rem;">✂️ Select Clip Segment</span>
-          <span id="selectedDurationBadge" class="selected-duration-badge">00:00:00 ➔ 00:01:00 (60s)</span>
+          <span style="font-weight: 800; font-size: 0.95rem; color:#fff;">✂️ Select Clip Segment</span>
+          <div id="selectedDurationBadge" class="selected-duration-badge">
+            <span id="rangeTimesBadge">00:00:00 ➔ 00:01:00</span>
+            <span class="badge-divider">&bull;</span>
+            <span class="clip-len-label">Clip Length: <strong id="clipLengthText" style="color:var(--green-success);">1 min 0s</strong></span>
+          </div>
         </div>
 
         <div class="dual-slider-track-wrap">
@@ -88,40 +93,40 @@ def get_tool_html(custom_h1, custom_sub, default_placeholder):
           <input type="range" id="rangeEnd" class="range-input" min="0" max="3600" value="60">
         </div>
 
-        <!-- Precise Time Inputs -->
+        <!-- Precise Time Inputs (Guaranteed No-Overflow Grid) -->
         <div class="timestamps-grid">
+          <!-- Start Box -->
           <div class="timestamp-box">
-            <div class="timestamp-label">
-              <span>Start Timestamp</span>
-              <span id="sliderLabelStart" style="color:#bf94ff;">00:00:00</span>
+            <div class="timestamp-header-row">
+              <span class="timestamp-title" style="color:#bf94ff;">Start Timestamp</span>
+              <div class="nudge-group">
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', -5)" title="Rewind 5s">-5s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', -1)" title="Rewind 1s">-1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', 1)" title="Forward 1s">+1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', 5)" title="Forward 5s">+5s</button>
+              </div>
             </div>
-            <div class="time-input-row">
-              <button class="nudge-btn" onclick="nudgeTime('start', -5)">-5s</button>
-              <button class="nudge-btn" onclick="nudgeTime('start', -1)">-1s</button>
-              <input type="text" id="startTime" class="time-input" value="00:00:00">
-              <button class="nudge-btn" onclick="nudgeTime('start', 1)">+1s</button>
-              <button class="nudge-btn" onclick="nudgeTime('start', 5)">+5s</button>
-            </div>
+            <input type="text" id="startTime" class="time-input" value="00:00:00" autocomplete="off">
           </div>
 
+          <!-- End Box -->
           <div class="timestamp-box">
-            <div class="timestamp-label">
-              <span>End Timestamp</span>
-              <span id="sliderLabelEnd" style="color:#00f59b;">00:01:00</span>
+            <div class="timestamp-header-row">
+              <span class="timestamp-title" style="color:#00f59b;">End Timestamp</span>
+              <div class="nudge-group">
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', -5)" title="Minus 5s">-5s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', -1)" title="Minus 1s">-1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', 1)" title="Plus 1s">+1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', 5)" title="Plus 5s">+5s</button>
+              </div>
             </div>
-            <div class="time-input-row">
-              <button class="nudge-btn" onclick="nudgeTime('end', -5)">-5s</button>
-              <button class="nudge-btn" onclick="nudgeTime('end', -1)">-1s</button>
-              <input type="text" id="endTime" class="time-input" value="00:01:00">
-              <button class="nudge-btn" onclick="nudgeTime('end', 1)">+1s</button>
-              <button class="nudge-btn" onclick="nudgeTime('end', 5)">+5s</button>
-            </div>
+            <input type="text" id="endTime" class="time-input" value="00:01:00" autocomplete="off">
           </div>
         </div>
 
         <!-- Quick Length Shortcuts -->
         <div class="quick-lengths-wrap">
-          <span style="font-size:0.8rem; color:var(--text-muted);">Quick Add:</span>
+          <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">Quick Add Duration:</span>
           <button type="button" class="quick-pill" onclick="quickAdd(30)">+30s</button>
           <button type="button" class="quick-pill" onclick="quickAdd(60)">+1 Min</button>
           <button type="button" class="quick-pill" onclick="quickAdd(180)">+3 Min</button>
@@ -132,7 +137,7 @@ def get_tool_html(custom_h1, custom_sub, default_placeholder):
         <!-- Action & Quality Row -->
         <div class="action-row">
           <div class="quality-select-wrapper">
-            <label for="qualitySelect" style="white-space:nowrap; font-weight:600;">Resolution:</label>
+            <label for="qualitySelect" style="white-space:nowrap; font-weight:700;">Resolution:</label>
             <select id="qualitySelect" class="quality-select">
               <option value="best">⚡ Best Available Source (Original)</option>
               <option value="1080p">⚡ 1080p60 Full HD</option>
@@ -169,4 +174,4 @@ def get_tool_html(custom_h1, custom_sub, default_placeholder):
     </div>
 """
 
-print("build_site_pages.py loaded.")
+print("build_site_pages.py loaded with updated layout.")

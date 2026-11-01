@@ -50,7 +50,7 @@ COMMON_CSS = """
       z-index: 0;
     }
 
-    /* DESKTOP HEADER */
+    /* HEADER */
     header {
       position: relative;
       z-index: 100;
@@ -333,7 +333,7 @@ COMMON_CSS = """
       font-weight: 600;
     }
 
-    /* 16:9 PREVIEW FRAME (DESKTOP & MOBILE PROPORTIONS) */
+    /* STRICT 16:9 PREVIEW FRAME (DESKTOP & MOBILE) */
     .video-frame-wrapper {
       position: relative;
       width: 100%;
@@ -345,11 +345,11 @@ COMMON_CSS = """
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7);
     }
 
+    .video-frame-wrapper iframe,
     .video-frame-wrapper video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      background: #000;
+      border: none;
       display: block;
     }
 
@@ -359,7 +359,7 @@ COMMON_CSS = """
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(14, 14, 16, 0.85);
+      background: rgba(14, 14, 16, 0.88);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -433,18 +433,31 @@ COMMON_CSS = """
       align-items: center;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
+    /* HIGHLIGHTED DURATION BADGE */
     .selected-duration-badge {
-      background: rgba(0, 245, 155, 0.12);
-      color: var(--green-success);
-      border: 1px solid rgba(0, 245, 155, 0.3);
-      padding: 0.25rem 0.85rem;
-      border-radius: 6px;
+      background: rgba(0, 245, 155, 0.1);
+      border: 1.5px solid rgba(0, 245, 155, 0.35);
+      padding: 0.35rem 0.9rem;
+      border-radius: 8px;
       font-size: 0.88rem;
       font-family: var(--font-mono);
       font-weight: 600;
+      color: #efeff1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-divider {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .clip-len-label {
+      color: #fff;
     }
 
     /* DUAL SLIDER */
@@ -518,65 +531,58 @@ COMMON_CSS = """
       box-shadow: 0 3px 10px rgba(0,0,0,0.6);
     }
 
+    /* TIMESTAMPS GRID: GUARANTEED ZERO OVERFLOW */
     .timestamps-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1.25rem;
       margin-bottom: 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .timestamp-box {
       background: #18181b;
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 1rem;
+      padding: 0.95rem 1rem;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
-    .timestamp-label {
+    .timestamp-header-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.6rem;
-      font-weight: 600;
-    }
-
-    .time-input-row {
-      display: flex;
       align-items: center;
-      gap: 0.45rem;
+      margin-bottom: 0.65rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
-    .time-input {
-      flex: 1;
-      background: #0e0e10;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      color: #fff;
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 0.55rem 0.5rem;
-      text-align: center;
-      outline: none;
-      min-width: 0;
-      transition: border-color 0.15s ease;
+    .timestamp-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .time-input:focus {
-      border-color: var(--accent);
+    .nudge-group {
+      display: inline-flex;
+      gap: 4px;
     }
 
     .nudge-btn {
       background: #27272a;
       border: 1px solid #3f3f46;
       color: #e4e4e7;
-      border-radius: 8px;
-      padding: 0.5rem 0.65rem;
-      font-size: 0.78rem;
-      font-weight: 600;
+      border-radius: 6px;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
+      font-family: var(--font-mono);
       touch-action: manipulation;
     }
 
@@ -584,6 +590,29 @@ COMMON_CSS = """
       background: var(--accent);
       border-color: var(--accent);
       color: #fff;
+    }
+
+    .time-input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #0e0e10;
+      border: 1.5px solid var(--card-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.65rem 0.75rem;
+      text-align: center;
+      outline: none;
+      letter-spacing: 1px;
+      transition: border-color 0.15s ease;
+      min-width: 0;
+    }
+
+    .time-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
     .quick-lengths-wrap {
@@ -612,7 +641,7 @@ COMMON_CSS = """
       color: #fff;
     }
 
-    /* ACTION ROW ON DESKTOP: PROPORTIONATE & BALANCED */
+    /* ACTION ROW: PROPORTIONATE & CLEAN */
     .action-row {
       display: flex;
       align-items: center;
@@ -986,7 +1015,7 @@ COMMON_CSS = """
     }
 
     /* ==============================================================================
-       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px ONLY - DESKTOP UNTOUCHED)
+       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px ONLY)
        ============================================================================== */
     @media (max-width: 768px) {
       header {
@@ -1054,7 +1083,7 @@ COMMON_CSS = """
       }
       .timestamps-grid {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 0.85rem;
       }
       .action-row {
         flex-direction: column;
@@ -1084,15 +1113,10 @@ COMMON_CSS = """
       .hero h1 {
         font-size: 1.65rem;
       }
-      .nudge-btn {
-        padding: 0.45rem 0.4rem;
-        font-size: 0.72rem;
-      }
-      .time-input {
-        font-size: 0.88rem;
-        padding: 0.45rem 0.2rem;
+      .selected-duration-badge {
+        font-size: 0.8rem;
       }
     }
 """
 
-print("Refined CSS for desktop and mobile loaded.")
+print("Updated build_full_site.py loaded.")

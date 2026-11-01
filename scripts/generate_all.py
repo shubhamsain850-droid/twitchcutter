@@ -6,6 +6,7 @@ TOOL_JS = """
       : "https://shubhamsain858-kickcuttr-api.hf.space";
 
     let totalVideoDuration = 3600;
+    let twitchPlayerInstance = null;
     let hlsInstance = null;
     let activeJobId = null;
     let pollInterval = null;
@@ -52,24 +53,78 @@ TOOL_JS = """
       return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
     }
 
+    function secToTwitchTime(s) {
+      s = Math.max(0, Math.floor(s));
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      return `${h}h${m}m${sec}s`;
+    }
+
+    // FORMAT HUMAN-READABLE DURATION (e.g. "31 min 41s", "1h 15m 10s")
+    function formatHumanDuration(seconds) {
+      seconds = Math.max(0, Math.floor(seconds));
+      if (seconds === 0) return "0s";
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+
+      let parts = [];
+      if (h > 0) parts.push(`${h}h`);
+      if (m > 0 || (h > 0 && s > 0)) parts.push(`${m} min`);
+      if (s > 0 || (h === 0 && m === 0)) parts.push(`${s}s`);
+      return parts.join(' ');
+    }
+
+    // EXTRACT TWITCH MEDIA ID / TYPE (VOD, Clip, Channel)
+    function extractTwitchMedia(url) {
+      const clean = String(url).trim();
+      const vodMatch = clean.match(/videos\/(\d+)/i);
+      if (vodMatch) {
+        return { type: 'video', id: vodMatch[1] };
+      }
+      const clipMatch = clean.match(/(?:clips\.twitch\.tv\/|(?:\/clip\/))([A-Za-z0-9_-]+)/i);
+      if (clipMatch) {
+        return { type: 'clip', id: clipMatch[1] };
+      }
+      const channelMatch = clean.match(/twitch\.tv\/([A-Za-z0-9_]+)/i);
+      if (channelMatch && !['videos', 'directory', 'p', 'search'].includes(channelMatch[1])) {
+        return { type: 'channel', id: channelMatch[1] };
+      }
+      return null;
+    }
+
     const rangeStart = document.getElementById('rangeStart');
     const rangeEnd = document.getElementById('rangeEnd');
     const sliderHighlight = document.getElementById('sliderHighlight');
     const startTimeInput = document.getElementById('startTime');
     const endTimeInput = document.getElementById('endTime');
-    const selectedDurationBadge = document.getElementById('selectedDurationBadge');
-    const previewVideo = document.getElementById('previewVideo');
+    const rangeTimesBadge = document.getElementById('rangeTimesBadge');
+    const clipLengthText = document.getElementById('clipLengthText');
 
-    // SEEK VIDEO DIRECTLY TO START TIMESTAMP
+    // SEEK VIDEO DIRECTLY TO TIMESTAMP (Twitch Interactive Player or HTML5 Video)
     function seekToTime(sec) {
-      if (!previewVideo) return;
       isSeekingFromCode = true;
-      try {
-        previewVideo.currentTime = sec;
-      } catch (e) {
-        console.warn('Seek error:', e);
+      sec = Math.max(0, Number(sec) || 0);
+
+      // 1. Twitch Embed Player SDK Seek
+      if (twitchPlayerInstance && typeof twitchPlayerInstance.seek === 'function') {
+        try {
+          twitchPlayerInstance.seek(sec);
+        } catch (e) {
+          console.warn('Twitch Player seek error:', e);
+        }
       }
-      setTimeout(() => { isSeekingFromCode = false; }, 120);
+
+      // 2. HTML5 Video Tag Seek
+      const previewVideo = document.getElementById('previewVideo');
+      if (previewVideo && previewVideo.style.display !== 'none') {
+        try {
+          previewVideo.currentTime = sec;
+        } catch (e) {}
+      }
+
+      setTimeout(() => { isSeekingFromCode = false; }, 150);
     }
 
     function seekToStart() {
@@ -78,33 +133,21 @@ TOOL_JS = """
     }
 
     function playFromStart() {
-      if (!previewVideo) return;
       const sVal = Number(rangeStart.value) || 0;
       seekToTime(sVal);
-      previewVideo.play().catch(e => console.log('Playback error:', e));
-    }
 
-    // Video Player Event Listeners to ensure video plays from selected start point
-    if (previewVideo) {
-      previewVideo.addEventListener('play', () => {
-        const sVal = Number(rangeStart.value) || 0;
-        const eVal = Number(rangeEnd.value) || totalVideoDuration;
-        // If current video playback is outside the selected clip range, jump straight to start
-        if (previewVideo.currentTime < sVal - 0.5 || previewVideo.currentTime >= eVal - 0.5) {
-          seekToTime(sVal);
-        }
-      });
+      // 1. Play Twitch Embed
+      if (twitchPlayerInstance && typeof twitchPlayerInstance.play === 'function') {
+        try {
+          twitchPlayerInstance.play();
+        } catch (e) {}
+      }
 
-      previewVideo.addEventListener('timeupdate', () => {
-        if (isSeekingFromCode) return;
-        const sVal = Number(rangeStart.value) || 0;
-        const eVal = Number(rangeEnd.value) || totalVideoDuration;
-        // When video reaches end of selected clip, automatically loop back to start
-        if (eVal > sVal && previewVideo.currentTime >= eVal) {
-          previewVideo.pause();
-          seekToTime(sVal);
-        }
-      });
+      // 2. Play HTML5 Video
+      const previewVideo = document.getElementById('previewVideo');
+      if (previewVideo && previewVideo.style.display !== 'none') {
+        previewVideo.play().catch(e => console.log('Playback error:', e));
+      }
     }
 
     function updateSliderUi(shouldSeek = false) {
@@ -136,14 +179,12 @@ TOOL_JS = """
       if (startTimeInput) startTimeInput.value = startFormatted;
       if (endTimeInput) endTimeInput.value = endFormatted;
 
+      // UPDATE EXACT CLIP DURATION
       const clipSec = Math.max(0, eVal - sVal);
-      if (selectedDurationBadge) {
-        selectedDurationBadge.textContent = `${startFormatted} ➔ ${endFormatted} (${clipSec}s)`;
-      }
-      const labelS = document.getElementById('sliderLabelStart');
-      const labelE = document.getElementById('sliderLabelEnd');
-      if (labelS) labelS.textContent = startFormatted;
-      if (labelE) labelE.textContent = endFormatted;
+      const humanDuration = formatHumanDuration(clipSec);
+
+      if (rangeTimesBadge) rangeTimesBadge.textContent = `${startFormatted} ➔ ${endFormatted}`;
+      if (clipLengthText) clipLengthText.textContent = `${humanDuration} (${clipSec}s)`;
 
       if (shouldSeek) {
         seekToTime(sVal);
@@ -158,7 +199,7 @@ TOOL_JS = """
           sVal = Math.max(0, eVal - 1);
           rangeStart.value = sVal;
         }
-        updateSliderUi(true); // Seek preview to start timestamp immediately
+        updateSliderUi(true); // Seek video immediately as slider is dragged
       });
 
       rangeEnd.addEventListener('input', () => {
@@ -176,7 +217,7 @@ TOOL_JS = """
       startTimeInput.addEventListener('change', () => {
         const sec = timeToSec(startTimeInput.value);
         if (rangeStart) rangeStart.value = Math.min(sec, Number(rangeEnd.value) - 1);
-        updateSliderUi(true); // Seek to new start
+        updateSliderUi(true); // Seek to new start time
       });
     }
 
@@ -193,7 +234,7 @@ TOOL_JS = """
         let cur = timeToSec(startTimeInput.value) + delta;
         cur = Math.max(0, Math.min(cur, timeToSec(endTimeInput.value) - 1));
         if (rangeStart) rangeStart.value = cur;
-        updateSliderUi(true); // Seek to start
+        updateSliderUi(true); // Seek to new start point
       } else {
         let cur = timeToSec(endTimeInput.value) + delta;
         cur = Math.min(totalVideoDuration, Math.max(cur, timeToSec(startTimeInput.value) + 1));
@@ -209,8 +250,10 @@ TOOL_JS = """
       updateSliderUi(false);
     }
 
-    function showSpinner() {
+    function showSpinner(text = 'Loading Twitch Stream Player (16:9)...') {
       const ov = document.getElementById('videoLoadingOverlay');
+      const t = document.getElementById('videoLoadingText');
+      if (t) t.textContent = text;
       if (ov) ov.style.display = 'flex';
     }
 
@@ -219,6 +262,101 @@ TOOL_JS = """
       if (ov) ov.style.display = 'none';
     }
 
+    // INITIALIZE OFFICIAL TWITCH PLAYER (NO CORS RESTRICTIONS)
+    function setupTwitchPlayer(url, initialStartSec = 0, previewUrlFallback = '') {
+      const embedDiv = document.getElementById('twitchPlayerEmbed');
+      const videoTag = document.getElementById('previewVideo');
+      if (!embedDiv) return;
+
+      embedDiv.innerHTML = '';
+      const media = extractTwitchMedia(url);
+
+      const cleanHost = window.location.hostname || 'localhost';
+      const cleanParents = [...new Set([cleanHost, 'twitchcutter.pages.dev', 'localhost', '127.0.0.1'])];
+
+      if (media && media.type === 'video' && window.Twitch && window.Twitch.Player) {
+        embedDiv.style.display = 'block';
+        if (videoTag) videoTag.style.display = 'none';
+
+        try {
+          twitchPlayerInstance = new Twitch.Player('twitchPlayerEmbed', {
+            width: '100%',
+            height: '100%',
+            video: media.id,
+            autoplay: false,
+            parent: cleanParents,
+            time: secToTwitchTime(initialStartSec)
+          });
+
+          twitchPlayerInstance.addEventListener(Twitch.Player.READY, () => {
+            hideSpinner();
+            if (initialStartSec > 0) {
+              twitchPlayerInstance.seek(initialStartSec);
+            }
+          });
+
+          twitchPlayerInstance.addEventListener(Twitch.Player.PLAY, () => {
+            hideSpinner();
+          });
+        } catch (e) {
+          console.warn('Twitch Player initialization failed, trying fallback:', e);
+          initVideoFallback(previewUrlFallback);
+        }
+      } else if (media && media.type === 'clip') {
+        embedDiv.style.display = 'block';
+        if (videoTag) videoTag.style.display = 'none';
+        embedDiv.innerHTML = `<iframe src="https://clips.twitch.tv/embed?clip=${media.id}&parent=${cleanHost}&parent=twitchcutter.pages.dev&autoplay=false" width="100%" height="100%" style="border:none;" allowfullscreen="true" scrolling="no"></iframe>`;
+        hideSpinner();
+      } else if (media && media.type === 'channel' && window.Twitch && window.Twitch.Player) {
+        embedDiv.style.display = 'block';
+        if (videoTag) videoTag.style.display = 'none';
+        try {
+          twitchPlayerInstance = new Twitch.Player('twitchPlayerEmbed', {
+            width: '100%',
+            height: '100%',
+            channel: media.id,
+            autoplay: false,
+            parent: cleanParents
+          });
+          twitchPlayerInstance.addEventListener(Twitch.Player.READY, hideSpinner);
+        } catch (e) {
+          initVideoFallback(previewUrlFallback);
+        }
+      } else {
+        initVideoFallback(previewUrlFallback);
+      }
+    }
+
+    function initVideoFallback(previewUrl) {
+      const embedDiv = document.getElementById('twitchPlayerEmbed');
+      const videoTag = document.getElementById('previewVideo');
+      if (embedDiv) embedDiv.style.display = 'none';
+      if (!videoTag) return;
+      videoTag.style.display = 'block';
+
+      if (hlsInstance) {
+        hlsInstance.destroy();
+        hlsInstance = null;
+      }
+
+      if (previewUrl) {
+        if (Hls.isSupported() && previewUrl.includes('.m3u8')) {
+          hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hlsInstance.loadSource(previewUrl);
+          hlsInstance.attachMedia(videoTag);
+          hlsInstance.on(Hls.Events.MANIFEST_PARSED, hideSpinner);
+          hlsInstance.on(Hls.Events.ERROR, hideSpinner);
+        } else {
+          videoTag.src = previewUrl;
+          videoTag.onloadeddata = hideSpinner;
+          setTimeout(hideSpinner, 3000);
+        }
+      } else {
+        hideSpinner();
+      }
+    }
+
+    // FETCH STREAM INFO
     async function handleFetch() {
       const input = document.getElementById('urlInput');
       const url = input.value.trim();
@@ -233,7 +371,7 @@ TOOL_JS = """
       fetchBtnText.textContent = 'Fetching...';
 
       const playerCard = document.getElementById('playerCard');
-      showSpinner();
+      showSpinner('Connecting to Twitch Stream (16:9)...');
 
       try {
         const resp = await fetch(`${API}/info`, {
@@ -304,33 +442,8 @@ TOOL_JS = """
             });
           }
 
-          // INITIALIZE HLS 16:9 PREVIEW VIDEO
-          if (data.preview_url && previewVideo) {
-            if (hlsInstance) {
-              hlsInstance.destroy();
-              hlsInstance = null;
-            }
-
-            const onVideoReady = () => {
-              hideSpinner();
-              // Seek video to initial start timestamp (0)
-              seekToTime(0);
-            };
-
-            if (Hls.isSupported() && data.preview_url.includes('.m3u8')) {
-              hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
-              hlsInstance.loadSource(data.preview_url);
-              hlsInstance.attachMedia(previewVideo);
-              hlsInstance.on(Hls.Events.MANIFEST_PARSED, onVideoReady);
-              hlsInstance.on(Hls.Events.ERROR, hideSpinner);
-            } else {
-              previewVideo.src = data.preview_url;
-              previewVideo.onloadeddata = onVideoReady;
-              setTimeout(hideSpinner, 3000);
-            }
-          } else {
-            hideSpinner();
-          }
+          // INITIALIZE OFFICIAL TWITCH PLAYER EMBED (CORS-FREE, 16:9)
+          setupTwitchPlayer(url, 0, data.preview_url);
 
           playerCard.scrollIntoView({ behavior: 'smooth' });
         } else {
@@ -445,4 +558,4 @@ TOOL_JS = """
     }
 """
 
-print("generate_all.py TOOL_JS updated.")
+print("generate_all.py TOOL_JS fully updated with Twitch Embed SDK and human durations.")

@@ -17,7 +17,10 @@
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Official Twitch Interactive Player SDK & HLS.js fallback -->
+  <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
@@ -182,7 +185,7 @@
       z-index: 0;
     }
 
-    /* DESKTOP HEADER */
+    /* HEADER */
     header {
       position: relative;
       z-index: 100;
@@ -465,7 +468,7 @@
       font-weight: 600;
     }
 
-    /* 16:9 PREVIEW FRAME (DESKTOP & MOBILE PROPORTIONS) */
+    /* STRICT 16:9 PREVIEW FRAME (DESKTOP & MOBILE) */
     .video-frame-wrapper {
       position: relative;
       width: 100%;
@@ -477,11 +480,11 @@
       box-shadow: 0 6px 24px rgba(0, 0, 0, 0.7);
     }
 
+    .video-frame-wrapper iframe,
     .video-frame-wrapper video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
-      background: #000;
+      border: none;
       display: block;
     }
 
@@ -491,7 +494,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(14, 14, 16, 0.85);
+      background: rgba(14, 14, 16, 0.88);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -565,18 +568,31 @@
       align-items: center;
       margin-bottom: 1.25rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
 
+    /* HIGHLIGHTED DURATION BADGE */
     .selected-duration-badge {
-      background: rgba(0, 245, 155, 0.12);
-      color: var(--green-success);
-      border: 1px solid rgba(0, 245, 155, 0.3);
-      padding: 0.25rem 0.85rem;
-      border-radius: 6px;
+      background: rgba(0, 245, 155, 0.1);
+      border: 1.5px solid rgba(0, 245, 155, 0.35);
+      padding: 0.35rem 0.9rem;
+      border-radius: 8px;
       font-size: 0.88rem;
       font-family: var(--font-mono);
       font-weight: 600;
+      color: #efeff1;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .badge-divider {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .clip-len-label {
+      color: #fff;
     }
 
     /* DUAL SLIDER */
@@ -650,65 +666,58 @@
       box-shadow: 0 3px 10px rgba(0,0,0,0.6);
     }
 
+    /* TIMESTAMPS GRID: GUARANTEED ZERO OVERFLOW */
     .timestamps-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1.25rem;
       margin-bottom: 1.5rem;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .timestamp-box {
       background: #18181b;
       border: 1px solid var(--card-border);
       border-radius: 12px;
-      padding: 1rem;
+      padding: 0.95rem 1rem;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow: hidden;
     }
 
-    .timestamp-label {
+    .timestamp-header-row {
       display: flex;
       justify-content: space-between;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.6rem;
-      font-weight: 600;
-    }
-
-    .time-input-row {
-      display: flex;
       align-items: center;
-      gap: 0.45rem;
+      margin-bottom: 0.65rem;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
-    .time-input {
-      flex: 1;
-      background: #0e0e10;
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      color: #fff;
-      font-family: var(--font-mono);
-      font-size: 1rem;
-      font-weight: 600;
-      padding: 0.55rem 0.5rem;
-      text-align: center;
-      outline: none;
-      min-width: 0;
-      transition: border-color 0.15s ease;
+    .timestamp-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .time-input:focus {
-      border-color: var(--accent);
+    .nudge-group {
+      display: inline-flex;
+      gap: 4px;
     }
 
     .nudge-btn {
       background: #27272a;
       border: 1px solid #3f3f46;
       color: #e4e4e7;
-      border-radius: 8px;
-      padding: 0.5rem 0.65rem;
-      font-size: 0.78rem;
-      font-weight: 600;
+      border-radius: 6px;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.75rem;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
+      font-family: var(--font-mono);
       touch-action: manipulation;
     }
 
@@ -716,6 +725,29 @@
       background: var(--accent);
       border-color: var(--accent);
       color: #fff;
+    }
+
+    .time-input {
+      width: 100%;
+      box-sizing: border-box;
+      background: #0e0e10;
+      border: 1.5px solid var(--card-border);
+      border-radius: 8px;
+      color: #fff;
+      font-family: var(--font-mono);
+      font-size: 1.15rem;
+      font-weight: 700;
+      padding: 0.65rem 0.75rem;
+      text-align: center;
+      outline: none;
+      letter-spacing: 1px;
+      transition: border-color 0.15s ease;
+      min-width: 0;
+    }
+
+    .time-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px var(--accent-glow);
     }
 
     .quick-lengths-wrap {
@@ -744,7 +776,7 @@
       color: #fff;
     }
 
-    /* ACTION ROW ON DESKTOP: PROPORTIONATE & BALANCED */
+    /* ACTION ROW: PROPORTIONATE & CLEAN */
     .action-row {
       display: flex;
       align-items: center;
@@ -1118,7 +1150,7 @@
     }
 
     /* ==============================================================================
-       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px ONLY - DESKTOP UNTOUCHED)
+       MOBILE SPECIFIC RESPONSIVE OVERRIDES (< 768px ONLY)
        ============================================================================== */
     @media (max-width: 768px) {
       header {
@@ -1186,7 +1218,7 @@
       }
       .timestamps-grid {
         grid-template-columns: 1fr;
-        gap: 0.75rem;
+        gap: 0.85rem;
       }
       .action-row {
         flex-direction: column;
@@ -1216,13 +1248,8 @@
       .hero h1 {
         font-size: 1.65rem;
       }
-      .nudge-btn {
-        padding: 0.45rem 0.4rem;
-        font-size: 0.72rem;
-      }
-      .time-input {
-        font-size: 0.88rem;
-        padding: 0.45rem 0.2rem;
+      .selected-duration-badge {
+        font-size: 0.8rem;
       }
     }
 
@@ -1318,8 +1345,8 @@
       <div class="quick-examples">
         <span>Try sample:</span>
         <span class="example-tag" onclick="loadSample('https://www.twitch.tv/eslcs')">ESLCS Channel</span>
-        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/shroud')">Shroud Stream</span>
-        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/tarik')">Tarik Stream</span>
+        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/videos/2914038727')">Shroud 8.7h VOD</span>
+        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/videos/2916013156')">ESLCS 23.6h VOD</span>
       </div>
     </div>
 
@@ -1338,20 +1365,21 @@
         </div>
       </div>
 
-      <!-- STRICT 16:9 PREVIEW FRAME (MOBILE & DESKTOP) -->
+      <!-- STRICT 16:9 PREVIEW FRAME (Twitch Interactive Player + HTML5 Fallback) -->
       <div class="video-frame-wrapper">
-        <video id="previewVideo" controls playsinline preload="metadata"></video>
+        <div id="twitchPlayerEmbed" style="width:100%; height:100%;"></div>
+        <video id="previewVideo" controls playsinline preload="metadata" style="display:none; width:100%; height:100%;"></video>
         <div id="videoLoadingOverlay" class="video-loading-overlay">
           <div class="spinner"></div>
-          <span>Loading Stream Preview (16:9)...</span>
+          <span id="videoLoadingText">Loading Twitch Stream Player (16:9)...</span>
         </div>
       </div>
 
       <!-- Playback Controls (Play from Start Timestamp) -->
       <div class="player-action-bar">
-        <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
           <button type="button" class="play-start-btn" onclick="playFromStart()">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
             <span>Play from Start Timestamp</span>
           </button>
           <button type="button" class="nudge-btn" onclick="seekToStart()" title="Seek video to start timestamp">
@@ -1366,8 +1394,12 @@
       <!-- Dual Range Slider Controls -->
       <div class="slider-section">
         <div class="slider-header">
-          <span style="font-weight: 700; font-size: 0.9rem;">✂️ Select Clip Segment</span>
-          <span id="selectedDurationBadge" class="selected-duration-badge">00:00:00 ➔ 00:01:00 (60s)</span>
+          <span style="font-weight: 800; font-size: 0.95rem; color:#fff;">✂️ Select Clip Segment</span>
+          <div id="selectedDurationBadge" class="selected-duration-badge">
+            <span id="rangeTimesBadge">00:00:00 ➔ 00:01:00</span>
+            <span class="badge-divider">&bull;</span>
+            <span class="clip-len-label">Clip Length: <strong id="clipLengthText" style="color:var(--green-success);">1 min 0s</strong></span>
+          </div>
         </div>
 
         <div class="dual-slider-track-wrap">
@@ -1377,40 +1409,40 @@
           <input type="range" id="rangeEnd" class="range-input" min="0" max="3600" value="60">
         </div>
 
-        <!-- Precise Time Inputs -->
+        <!-- Precise Time Inputs (Guaranteed No-Overflow Grid) -->
         <div class="timestamps-grid">
+          <!-- Start Box -->
           <div class="timestamp-box">
-            <div class="timestamp-label">
-              <span>Start Timestamp</span>
-              <span id="sliderLabelStart" style="color:#bf94ff;">00:00:00</span>
+            <div class="timestamp-header-row">
+              <span class="timestamp-title" style="color:#bf94ff;">Start Timestamp</span>
+              <div class="nudge-group">
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', -5)" title="Rewind 5s">-5s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', -1)" title="Rewind 1s">-1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', 1)" title="Forward 1s">+1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('start', 5)" title="Forward 5s">+5s</button>
+              </div>
             </div>
-            <div class="time-input-row">
-              <button class="nudge-btn" onclick="nudgeTime('start', -5)">-5s</button>
-              <button class="nudge-btn" onclick="nudgeTime('start', -1)">-1s</button>
-              <input type="text" id="startTime" class="time-input" value="00:00:00">
-              <button class="nudge-btn" onclick="nudgeTime('start', 1)">+1s</button>
-              <button class="nudge-btn" onclick="nudgeTime('start', 5)">+5s</button>
-            </div>
+            <input type="text" id="startTime" class="time-input" value="00:00:00" autocomplete="off">
           </div>
 
+          <!-- End Box -->
           <div class="timestamp-box">
-            <div class="timestamp-label">
-              <span>End Timestamp</span>
-              <span id="sliderLabelEnd" style="color:#00f59b;">00:01:00</span>
+            <div class="timestamp-header-row">
+              <span class="timestamp-title" style="color:#00f59b;">End Timestamp</span>
+              <div class="nudge-group">
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', -5)" title="Minus 5s">-5s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', -1)" title="Minus 1s">-1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', 1)" title="Plus 1s">+1s</button>
+                <button type="button" class="nudge-btn" onclick="nudgeTime('end', 5)" title="Plus 5s">+5s</button>
+              </div>
             </div>
-            <div class="time-input-row">
-              <button class="nudge-btn" onclick="nudgeTime('end', -5)">-5s</button>
-              <button class="nudge-btn" onclick="nudgeTime('end', -1)">-1s</button>
-              <input type="text" id="endTime" class="time-input" value="00:01:00">
-              <button class="nudge-btn" onclick="nudgeTime('end', 1)">+1s</button>
-              <button class="nudge-btn" onclick="nudgeTime('end', 5)">+5s</button>
-            </div>
+            <input type="text" id="endTime" class="time-input" value="00:01:00" autocomplete="off">
           </div>
         </div>
 
         <!-- Quick Length Shortcuts -->
         <div class="quick-lengths-wrap">
-          <span style="font-size:0.8rem; color:var(--text-muted);">Quick Add:</span>
+          <span style="font-size:0.82rem; color:var(--text-muted); font-weight:600;">Quick Add Duration:</span>
           <button type="button" class="quick-pill" onclick="quickAdd(30)">+30s</button>
           <button type="button" class="quick-pill" onclick="quickAdd(60)">+1 Min</button>
           <button type="button" class="quick-pill" onclick="quickAdd(180)">+3 Min</button>
@@ -1421,7 +1453,7 @@
         <!-- Action & Quality Row -->
         <div class="action-row">
           <div class="quality-select-wrapper">
-            <label for="qualitySelect" style="white-space:nowrap; font-weight:600;">Resolution:</label>
+            <label for="qualitySelect" style="white-space:nowrap; font-weight:700;">Resolution:</label>
             <select id="qualitySelect" class="quality-select">
               <option value="best">⚡ Best Available Source (Original)</option>
               <option value="1080p">⚡ 1080p60 Full HD</option>
@@ -1661,6 +1693,7 @@
       : "https://shubhamsain858-kickcuttr-api.hf.space";
 
     let totalVideoDuration = 3600;
+    let twitchPlayerInstance = null;
     let hlsInstance = null;
     let activeJobId = null;
     let pollInterval = null;
@@ -1707,24 +1740,78 @@
       return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
     }
 
+    function secToTwitchTime(s) {
+      s = Math.max(0, Math.floor(s));
+      const h = Math.floor(s / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const sec = s % 60;
+      return `${h}h${m}m${sec}s`;
+    }
+
+    // FORMAT HUMAN-READABLE DURATION (e.g. "31 min 41s", "1h 15m 10s")
+    function formatHumanDuration(seconds) {
+      seconds = Math.max(0, Math.floor(seconds));
+      if (seconds === 0) return "0s";
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+
+      let parts = [];
+      if (h > 0) parts.push(`${h}h`);
+      if (m > 0 || (h > 0 && s > 0)) parts.push(`${m} min`);
+      if (s > 0 || (h === 0 && m === 0)) parts.push(`${s}s`);
+      return parts.join(' ');
+    }
+
+    // EXTRACT TWITCH MEDIA ID / TYPE (VOD, Clip, Channel)
+    function extractTwitchMedia(url) {
+      const clean = String(url).trim();
+      const vodMatch = clean.match(/videos\/(\d+)/i);
+      if (vodMatch) {
+        return { type: 'video', id: vodMatch[1] };
+      }
+      const clipMatch = clean.match(/(?:clips\.twitch\.tv\/|(?:\/clip\/))([A-Za-z0-9_-]+)/i);
+      if (clipMatch) {
+        return { type: 'clip', id: clipMatch[1] };
+      }
+      const channelMatch = clean.match(/twitch\.tv\/([A-Za-z0-9_]+)/i);
+      if (channelMatch && !['videos', 'directory', 'p', 'search'].includes(channelMatch[1])) {
+        return { type: 'channel', id: channelMatch[1] };
+      }
+      return null;
+    }
+
     const rangeStart = document.getElementById('rangeStart');
     const rangeEnd = document.getElementById('rangeEnd');
     const sliderHighlight = document.getElementById('sliderHighlight');
     const startTimeInput = document.getElementById('startTime');
     const endTimeInput = document.getElementById('endTime');
-    const selectedDurationBadge = document.getElementById('selectedDurationBadge');
-    const previewVideo = document.getElementById('previewVideo');
+    const rangeTimesBadge = document.getElementById('rangeTimesBadge');
+    const clipLengthText = document.getElementById('clipLengthText');
 
-    // SEEK VIDEO DIRECTLY TO START TIMESTAMP
+    // SEEK VIDEO DIRECTLY TO TIMESTAMP (Twitch Interactive Player or HTML5 Video)
     function seekToTime(sec) {
-      if (!previewVideo) return;
       isSeekingFromCode = true;
-      try {
-        previewVideo.currentTime = sec;
-      } catch (e) {
-        console.warn('Seek error:', e);
+      sec = Math.max(0, Number(sec) || 0);
+
+      // 1. Twitch Embed Player SDK Seek
+      if (twitchPlayerInstance && typeof twitchPlayerInstance.seek === 'function') {
+        try {
+          twitchPlayerInstance.seek(sec);
+        } catch (e) {
+          console.warn('Twitch Player seek error:', e);
+        }
       }
-      setTimeout(() => { isSeekingFromCode = false; }, 120);
+
+      // 2. HTML5 Video Tag Seek
+      const previewVideo = document.getElementById('previewVideo');
+      if (previewVideo && previewVideo.style.display !== 'none') {
+        try {
+          previewVideo.currentTime = sec;
+        } catch (e) {}
+      }
+
+      setTimeout(() => { isSeekingFromCode = false; }, 150);
     }
 
     function seekToStart() {
@@ -1733,33 +1820,21 @@
     }
 
     function playFromStart() {
-      if (!previewVideo) return;
       const sVal = Number(rangeStart.value) || 0;
       seekToTime(sVal);
-      previewVideo.play().catch(e => console.log('Playback error:', e));
-    }
 
-    // Video Player Event Listeners to ensure video plays from selected start point
-    if (previewVideo) {
-      previewVideo.addEventListener('play', () => {
-        const sVal = Number(rangeStart.value) || 0;
-        const eVal = Number(rangeEnd.value) || totalVideoDuration;
-        // If current video playback is outside the selected clip range, jump straight to start
-        if (previewVideo.currentTime < sVal - 0.5 || previewVideo.currentTime >= eVal - 0.5) {
-          seekToTime(sVal);
-        }
-      });
+      // 1. Play Twitch Embed
+      if (twitchPlayerInstance && typeof twitchPlayerInstance.play === 'function') {
+        try {
+          twitchPlayerInstance.play();
+        } catch (e) {}
+      }
 
-      previewVideo.addEventListener('timeupdate', () => {
-        if (isSeekingFromCode) return;
-        const sVal = Number(rangeStart.value) || 0;
-        const eVal = Number(rangeEnd.value) || totalVideoDuration;
-        // When video reaches end of selected clip, automatically loop back to start
-        if (eVal > sVal && previewVideo.currentTime >= eVal) {
-          previewVideo.pause();
-          seekToTime(sVal);
-        }
-      });
+      // 2. Play HTML5 Video
+      const previewVideo = document.getElementById('previewVideo');
+      if (previewVideo && previewVideo.style.display !== 'none') {
+        previewVideo.play().catch(e => console.log('Playback error:', e));
+      }
     }
 
     function updateSliderUi(shouldSeek = false) {
@@ -1791,14 +1866,12 @@
       if (startTimeInput) startTimeInput.value = startFormatted;
       if (endTimeInput) endTimeInput.value = endFormatted;
 
+      // UPDATE EXACT CLIP DURATION
       const clipSec = Math.max(0, eVal - sVal);
-      if (selectedDurationBadge) {
-        selectedDurationBadge.textContent = `${startFormatted} ➔ ${endFormatted} (${clipSec}s)`;
-      }
-      const labelS = document.getElementById('sliderLabelStart');
-      const labelE = document.getElementById('sliderLabelEnd');
-      if (labelS) labelS.textContent = startFormatted;
-      if (labelE) labelE.textContent = endFormatted;
+      const humanDuration = formatHumanDuration(clipSec);
+
+      if (rangeTimesBadge) rangeTimesBadge.textContent = `${startFormatted} ➔ ${endFormatted}`;
+      if (clipLengthText) clipLengthText.textContent = `${humanDuration} (${clipSec}s)`;
 
       if (shouldSeek) {
         seekToTime(sVal);
@@ -1813,7 +1886,7 @@
           sVal = Math.max(0, eVal - 1);
           rangeStart.value = sVal;
         }
-        updateSliderUi(true); // Seek preview to start timestamp immediately
+        updateSliderUi(true); // Seek video immediately as slider is dragged
       });
 
       rangeEnd.addEventListener('input', () => {
@@ -1831,7 +1904,7 @@
       startTimeInput.addEventListener('change', () => {
         const sec = timeToSec(startTimeInput.value);
         if (rangeStart) rangeStart.value = Math.min(sec, Number(rangeEnd.value) - 1);
-        updateSliderUi(true); // Seek to new start
+        updateSliderUi(true); // Seek to new start time
       });
     }
 
@@ -1848,7 +1921,7 @@
         let cur = timeToSec(startTimeInput.value) + delta;
         cur = Math.max(0, Math.min(cur, timeToSec(endTimeInput.value) - 1));
         if (rangeStart) rangeStart.value = cur;
-        updateSliderUi(true); // Seek to start
+        updateSliderUi(true); // Seek to new start point
       } else {
         let cur = timeToSec(endTimeInput.value) + delta;
         cur = Math.min(totalVideoDuration, Math.max(cur, timeToSec(startTimeInput.value) + 1));
@@ -1864,8 +1937,10 @@
       updateSliderUi(false);
     }
 
-    function showSpinner() {
+    function showSpinner(text = 'Loading Twitch Stream Player (16:9)...') {
       const ov = document.getElementById('videoLoadingOverlay');
+      const t = document.getElementById('videoLoadingText');
+      if (t) t.textContent = text;
       if (ov) ov.style.display = 'flex';
     }
 
@@ -1874,6 +1949,101 @@
       if (ov) ov.style.display = 'none';
     }
 
+    // INITIALIZE OFFICIAL TWITCH PLAYER (NO CORS RESTRICTIONS)
+    function setupTwitchPlayer(url, initialStartSec = 0, previewUrlFallback = '') {
+      const embedDiv = document.getElementById('twitchPlayerEmbed');
+      const videoTag = document.getElementById('previewVideo');
+      if (!embedDiv) return;
+
+      embedDiv.innerHTML = '';
+      const media = extractTwitchMedia(url);
+
+      const cleanHost = window.location.hostname || 'localhost';
+      const cleanParents = [...new Set([cleanHost, 'twitchcutter.pages.dev', 'localhost', '127.0.0.1'])];
+
+      if (media && media.type === 'video' && window.Twitch && window.Twitch.Player) {
+        embedDiv.style.display = 'block';
+        if (videoTag) videoTag.style.display = 'none';
+
+        try {
+          twitchPlayerInstance = new Twitch.Player('twitchPlayerEmbed', {
+            width: '100%',
+            height: '100%',
+            video: media.id,
+            autoplay: false,
+            parent: cleanParents,
+            time: secToTwitchTime(initialStartSec)
+          });
+
+          twitchPlayerInstance.addEventListener(Twitch.Player.READY, () => {
+            hideSpinner();
+            if (initialStartSec > 0) {
+              twitchPlayerInstance.seek(initialStartSec);
+            }
+          });
+
+          twitchPlayerInstance.addEventListener(Twitch.Player.PLAY, () => {
+            hideSpinner();
+          });
+        } catch (e) {
+          console.warn('Twitch Player initialization failed, trying fallback:', e);
+          initVideoFallback(previewUrlFallback);
+        }
+      } else if (media && media.type === 'clip') {
+        embedDiv.style.display = 'block';
+        if (videoTag) videoTag.style.display = 'none';
+        embedDiv.innerHTML = `<iframe src="https://clips.twitch.tv/embed?clip=${media.id}&parent=${cleanHost}&parent=twitchcutter.pages.dev&autoplay=false" width="100%" height="100%" style="border:none;" allowfullscreen="true" scrolling="no"></iframe>`;
+        hideSpinner();
+      } else if (media && media.type === 'channel' && window.Twitch && window.Twitch.Player) {
+        embedDiv.style.display = 'block';
+        if (videoTag) videoTag.style.display = 'none';
+        try {
+          twitchPlayerInstance = new Twitch.Player('twitchPlayerEmbed', {
+            width: '100%',
+            height: '100%',
+            channel: media.id,
+            autoplay: false,
+            parent: cleanParents
+          });
+          twitchPlayerInstance.addEventListener(Twitch.Player.READY, hideSpinner);
+        } catch (e) {
+          initVideoFallback(previewUrlFallback);
+        }
+      } else {
+        initVideoFallback(previewUrlFallback);
+      }
+    }
+
+    function initVideoFallback(previewUrl) {
+      const embedDiv = document.getElementById('twitchPlayerEmbed');
+      const videoTag = document.getElementById('previewVideo');
+      if (embedDiv) embedDiv.style.display = 'none';
+      if (!videoTag) return;
+      videoTag.style.display = 'block';
+
+      if (hlsInstance) {
+        hlsInstance.destroy();
+        hlsInstance = null;
+      }
+
+      if (previewUrl) {
+        if (Hls.isSupported() && previewUrl.includes('.m3u8')) {
+          hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
+          hlsInstance.loadSource(previewUrl);
+          hlsInstance.attachMedia(videoTag);
+          hlsInstance.on(Hls.Events.MANIFEST_PARSED, hideSpinner);
+          hlsInstance.on(Hls.Events.ERROR, hideSpinner);
+        } else {
+          videoTag.src = previewUrl;
+          videoTag.onloadeddata = hideSpinner;
+          setTimeout(hideSpinner, 3000);
+        }
+      } else {
+        hideSpinner();
+      }
+    }
+
+    // FETCH STREAM INFO
     async function handleFetch() {
       const input = document.getElementById('urlInput');
       const url = input.value.trim();
@@ -1888,7 +2058,7 @@
       fetchBtnText.textContent = 'Fetching...';
 
       const playerCard = document.getElementById('playerCard');
-      showSpinner();
+      showSpinner('Connecting to Twitch Stream (16:9)...');
 
       try {
         const resp = await fetch(`${API}/info`, {
@@ -1959,33 +2129,8 @@
             });
           }
 
-          // INITIALIZE HLS 16:9 PREVIEW VIDEO
-          if (data.preview_url && previewVideo) {
-            if (hlsInstance) {
-              hlsInstance.destroy();
-              hlsInstance = null;
-            }
-
-            const onVideoReady = () => {
-              hideSpinner();
-              // Seek video to initial start timestamp (0)
-              seekToTime(0);
-            };
-
-            if (Hls.isSupported() && data.preview_url.includes('.m3u8')) {
-              hlsInstance = new Hls({ enableWorker: true, lowLatencyMode: true });
-              hlsInstance.loadSource(data.preview_url);
-              hlsInstance.attachMedia(previewVideo);
-              hlsInstance.on(Hls.Events.MANIFEST_PARSED, onVideoReady);
-              hlsInstance.on(Hls.Events.ERROR, hideSpinner);
-            } else {
-              previewVideo.src = data.preview_url;
-              previewVideo.onloadeddata = onVideoReady;
-              setTimeout(hideSpinner, 3000);
-            }
-          } else {
-            hideSpinner();
-          }
+          // INITIALIZE OFFICIAL TWITCH PLAYER EMBED (CORS-FREE, 16:9)
+          setupTwitchPlayer(url, 0, data.preview_url);
 
           playerCard.scrollIntoView({ behavior: 'smooth' });
         } else {

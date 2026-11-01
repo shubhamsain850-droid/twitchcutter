@@ -85,4 +85,7 @@ FAVICON_HEAD = """  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">"""
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <!-- Official Twitch Interactive Player SDK & HLS.js fallback -->
+  <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>"""
