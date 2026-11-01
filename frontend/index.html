@@ -3,31 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TwitchCutter — Free Online Twitch VOD Clipper &amp; Stream Cutter</title>
-  <meta name="description" content="Cut, trim, and download Twitch VODs, livestreams, and clips online without watermarks. Choose exact timestamps, select 1080p60 Full HD quality, and download in seconds.">
-  <meta name="keywords" content="twitch cutter, cut twitch vod, twitch clip cutter, trim twitch vod, download part of twitch vod, twitch vod downloader">
+  <title>Free Twitch VOD Cutter &amp; Clip Downloader Online | TwitchCutter</title>
+  <meta name="title" content="Free Twitch VOD Cutter &amp; Clip Downloader Online | TwitchCutter">
+  <meta name="description" content="Free online Twitch VOD cutter &amp; stream clip downloader. Cut any segment by timestamp or download clips in 1080p60 MP4 — no software, no watermark, no login.">
+  <meta name="keywords" content="twitch vod cutter, cut twitch vod, twitch clip cutter, trim twitch vod, download part of twitch vod, twitch vod downloader, free twitch clip downloader, twitch stream cutter, untwitch alternative, twitch to mp4">
+  <meta name="author" content="TwitchCutter">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://twitchcutter.pages.dev/">
 
-  <!-- Favicon & Brand Icons -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=4">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=4">
   <link rel="shortcut icon" href="/favicon.ico?v=4">
   <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4">
-
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="TwitchCutter — Free Online Twitch VOD Clipper &amp; Stream Cutter">
-  <meta property="og:description" content="Cut and download any Twitch VOD or stream segment by timestamp. 1080p60 Full HD, no watermark, fast cloud slicing.">
-  <meta property="og:site_name" content="TwitchCutter">
-
-  <!-- HLS.js for interactive stream preview -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-
-  <!-- Google Fonts: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://twitchcutter.pages.dev/">
+  <meta property="og:title" content="Free Twitch VOD Cutter &amp; Clip Downloader Online | TwitchCutter">
+  <meta property="og:description" content="Cut, trim &amp; download Twitch VODs and clips online for free. No login, no watermark, no software. Set timestamps and export to MP4.">
+  <meta property="og:image" content="https://twitchcutter.pages.dev/favicon.svg?v=4">
+  <meta property="og:site_name" content="TwitchCutter">
+
+  <!-- Twitter / X -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://twitchcutter.pages.dev/">
+  <meta property="twitter:title" content="Free Twitch VOD Cutter &amp; Clip Downloader Online | TwitchCutter">
+  <meta property="twitter:description" content="Cut, trim &amp; download Twitch VODs by timestamp. 1080p60 MP4, no watermark, 100% free online tool.">
+  <meta property="twitter:image" content="https://twitchcutter.pages.dev/favicon.svg?v=4">
+
+  <!-- Google Structured Data: WebApplication -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "TwitchCutter",
+    "url": "https://twitchcutter.pages.dev/",
+    "description": "Free online Twitch VOD cutter and clip downloader. Slice any segment by start and end timestamp with live preview, 1080p quality, and no watermarks.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "TwitchCutter",
+      "url": "https://twitchcutter.pages.dev/"
+    }
+  }
+  </script>
+
+  <!-- Google Structured Data: BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://twitchcutter.pages.dev/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Twitch Clip Cutter",
+        "item": "https://twitchcutter.pages.dev/twitch-clip-cutter"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Twitch VOD Downloader",
+        "item": "https://twitchcutter.pages.dev/twitch-vod-downloader"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Google Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I cut a Twitch VOD online by timestamp?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Paste any Twitch VOD URL into TwitchCutter, click Fetch Stream, set your start and end timestamps using the visual dual slider or manual time boxes, then click Cut & Download Clip. Only the selected segment will download as an MP4."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I clip longer than 60 seconds on Twitch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Twitch's native clipping button caps clips at 60 seconds. TwitchCutter removes this limit, letting you cut clips from 5 seconds to over 2 hours from any public VOD."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do Twitch VODs last before expiring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard Twitch broadcasters' VODs expire in 7 days. Affiliates have 14 days, while Partners, Prime, and Turbo users get 60 days before past broadcasts are deleted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does TwitchCutter add any watermark to clips?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All MP4 video downloads are 100% clean and watermark-free, preserving the streamer's original broadcast quality up to 1080p60."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is TwitchCutter free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "TwitchCutter is 100% free with no registration, no subscription, and no software download required."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- HLS.js for interactive stream preview -->
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
   <style>
+
     :root {
       --bg-dark: #0e0e10;
       --bg-card: #18181b;
@@ -43,11 +156,7 @@
       --font-mono: 'JetBrains Mono', monospace;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-dark);
@@ -60,7 +169,6 @@
       overflow-x: hidden;
     }
 
-    /* Ambient Glow background */
     .ambient-glow {
       position: absolute;
       top: -120px;
@@ -79,9 +187,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.25rem 2rem;
+      padding: 1.1rem 2rem;
       border-bottom: 1px solid var(--card-border);
-      background: rgba(14, 14, 16, 0.85);
+      background: rgba(14, 14, 16, 0.88);
       backdrop-filter: blur(12px);
     }
 
@@ -94,20 +202,23 @@
     }
 
     .brand-icon {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       background: transparent;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       filter: drop-shadow(0 4px 12px var(--accent-glow));
+      transition: transform 0.2s ease, filter 0.2s ease;
     }
 
-    .brand-icon svg {
-      width: 40px;
-      height: 40px;
+    .brand:hover .brand-icon {
+      transform: scale(1.06) rotate(-3deg);
+      filter: drop-shadow(0 0 16px var(--accent-glow));
     }
+
+    .brand-icon svg { width: 38px; height: 38px; }
 
     .brand-name {
       font-size: 1.35rem;
@@ -115,8 +226,24 @@
       letter-spacing: -0.5px;
     }
 
-    .brand-name span {
-      color: var(--accent);
+    .brand-name span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #fff;
     }
 
     .header-badge {
@@ -126,7 +253,7 @@
       background: rgba(145, 70, 255, 0.15);
       color: #bf94ff;
       border: 1px solid rgba(145, 70, 255, 0.3);
-      padding: 0.2rem 0.6rem;
+      padding: 0.25rem 0.65rem;
       border-radius: 999px;
     }
 
@@ -161,10 +288,10 @@
     }
 
     .hero h1 {
-      font-size: 2.75rem;
+      font-size: 2.6rem;
       font-weight: 800;
       letter-spacing: -1px;
-      line-height: 1.15;
+      line-height: 1.18;
       margin-bottom: 1rem;
       background: linear-gradient(180deg, #ffffff 0%, #adadb8 100%);
       -webkit-background-clip: text;
@@ -179,8 +306,8 @@
 
     .hero p {
       color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 650px;
+      font-size: 1.05rem;
+      max-width: 660px;
       margin: 0 auto;
     }
 
@@ -191,7 +318,7 @@
       border-radius: 18px;
       padding: 1.5rem;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
     }
 
     .input-wrapper {
@@ -250,188 +377,180 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       color: var(--text-muted);
+      flex-wrap: wrap;
     }
 
     .example-tag {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 0.2rem 0.5rem;
+      background: #26262c;
+      padding: 0.25rem 0.65rem;
       border-radius: 6px;
       cursor: pointer;
-      color: #c8a2ff;
-      transition: all 0.2s;
+      transition: background 0.15s ease, color 0.15s ease;
     }
 
     .example-tag:hover {
-      background: rgba(145, 70, 255, 0.2);
-      border-color: var(--accent);
+      background: var(--accent);
+      color: #fff;
     }
 
-    /* Video Player & Cutter Card */
+    /* Player Card */
     .player-card {
       display: none;
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 1.75rem;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-      margin-bottom: 2rem;
-      animation: fadeIn 0.3s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
     .video-info-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 1.25rem;
-      gap: 1rem;
+      margin-bottom: 1rem;
     }
 
     .video-title {
       font-size: 1.25rem;
       font-weight: 700;
-      color: #fff;
-      line-height: 1.35;
       margin-bottom: 0.35rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .video-meta {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      font-size: 0.88rem;
+      gap: 0.6rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
     .uploader-badge {
+      background: rgba(145, 70, 255, 0.2);
       color: #bf94ff;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
       font-weight: 600;
     }
 
-    .badge-live {
-      background: var(--red-live);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-    }
-
     .badge-vod {
-      background: rgba(145, 70, 255, 0.25);
-      color: #bf94ff;
-      border: 1px solid rgba(145, 70, 255, 0.4);
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 0.2rem 0.5rem;
+      background: #27272a;
+      color: #e4e4e7;
+      padding: 0.15rem 0.5rem;
       border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
     }
 
-    /* Video Container */
     .video-frame-wrapper {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
       background: #000;
       border-radius: 12px;
       overflow: hidden;
+      aspect-ratio: 16 / 9;
       margin-bottom: 1.5rem;
-      border: 1px solid var(--card-border);
     }
 
-    video {
+    .video-frame-wrapper video {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      display: block;
     }
 
     .video-loading-overlay {
       position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(14, 14, 16, 0.8);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      color: #fff;
       font-size: 0.9rem;
+      color: var(--text-muted);
       z-index: 5;
     }
 
-    /* Range Slider Section */
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid rgba(145, 70, 255, 0.2);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Slider Section */
     .slider-section {
-      background: #0e0e10;
+      background: #111114;
       border: 1px solid var(--card-border);
       border-radius: 14px;
       padding: 1.25rem;
-      margin-bottom: 1.5rem;
     }
 
     .slider-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
     }
 
     .selected-duration-badge {
-      font-family: var(--font-mono);
-      font-size: 0.95rem;
-      color: #00f59b;
-      background: rgba(0, 245, 155, 0.1);
-      border: 1px solid rgba(0, 245, 155, 0.25);
-      padding: 0.25rem 0.75rem;
+      background: rgba(0, 245, 155, 0.12);
+      color: var(--green-success);
+      border: 1px solid rgba(0, 245, 155, 0.3);
+      padding: 0.2rem 0.65rem;
       border-radius: 6px;
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
       font-weight: 600;
     }
 
     .dual-slider-track-wrap {
       position: relative;
-      height: 38px;
-      margin-bottom: 1rem;
+      height: 44px;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
     }
 
     .slider-bg-bar {
       position: absolute;
-      top: 50%;
       left: 0;
       right: 0;
       height: 8px;
-      transform: translateY(-50%);
-      background: #26262c;
-      border-radius: 4px;
+      background: #27272a;
+      border-radius: 999px;
     }
 
     .slider-highlight-bar {
       position: absolute;
-      top: 50%;
       height: 8px;
-      transform: translateY(-50%);
-      background: linear-gradient(90deg, #9146ff 0%, #00f59b 100%);
-      border-radius: 4px;
+      background: linear-gradient(90deg, #bf94ff 0%, #9146ff 50%, #00f59b 100%);
+      border-radius: 999px;
+      pointer-events: none;
       box-shadow: 0 0 10px rgba(145, 70, 255, 0.5);
     }
 
     .range-input {
       position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
       width: 100%;
       pointer-events: none;
       -webkit-appearance: none;
       appearance: none;
       background: transparent;
       outline: none;
-      margin: 0;
+      height: 8px;
     }
 
     .range-input::-webkit-slider-thumb {
@@ -441,22 +560,22 @@
       width: 22px;
       height: 22px;
       border-radius: 50%;
-      background: #fff;
+      background: #ffffff;
       border: 3px solid var(--accent);
       cursor: ew-resize;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.6);
-      transition: transform 0.1s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: transform 0.1s ease, border-color 0.1s ease;
     }
 
     .range-input::-webkit-slider-thumb:hover {
-      transform: scale(1.18);
+      transform: scale(1.15);
+      border-color: #00f59b;
     }
 
-    /* Manual Timestamps Grid */
     .timestamps-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1.25rem;
+      gap: 1rem;
       margin-bottom: 1.25rem;
     }
 
@@ -468,19 +587,18 @@
     }
 
     .timestamp-label {
-      font-size: 0.78rem;
-      text-transform: uppercase;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 0.4rem;
       display: flex;
       justify-content: space-between;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
     }
 
     .time-input-row {
       display: flex;
-      gap: 0.4rem;
       align-items: center;
+      gap: 0.4rem;
     }
 
     .time-input {
@@ -490,8 +608,9 @@
       border-radius: 6px;
       color: #fff;
       font-family: var(--font-mono);
-      font-size: 1.05rem;
-      padding: 0.4rem 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.45rem 0.5rem;
       text-align: center;
       outline: none;
     }
@@ -501,88 +620,91 @@
     }
 
     .nudge-btn {
-      background: #26262c;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      color: #fff;
-      padding: 0.4rem 0.55rem;
+      background: #27272a;
+      border: 1px solid #3f3f46;
+      color: #e4e4e7;
       border-radius: 6px;
+      padding: 0.4rem 0.55rem;
       font-size: 0.75rem;
       font-weight: 600;
       cursor: pointer;
-      transition: background 0.15s;
+      transition: all 0.15s ease;
     }
 
     .nudge-btn:hover {
       background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
     }
 
-    /* Quality & Action Row */
     .action-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;
       flex-wrap: wrap;
+      padding-top: 0.5rem;
     }
 
     .quality-select-wrapper {
       display: flex;
       align-items: center;
       gap: 0.6rem;
-    }
-
-    .quality-select-wrapper label {
       font-size: 0.88rem;
       color: var(--text-muted);
-      font-weight: 600;
     }
 
     .quality-select {
-      background: #0e0e10;
+      background: #18181b;
       border: 1px solid var(--card-border);
       color: #fff;
-      padding: 0.6rem 1rem;
+      padding: 0.55rem 0.85rem;
       border-radius: 8px;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       outline: none;
       cursor: pointer;
     }
 
     .cut-btn {
-      background: linear-gradient(135deg, #00f59b 0%, #00b875 100%);
+      background: linear-gradient(135deg, #00f59b 0%, #00c77d 100%);
       color: #0e0e10;
       border: none;
-      padding: 0.8rem 2rem;
       border-radius: 10px;
-      font-size: 1.05rem;
+      padding: 0.75rem 1.75rem;
+      font-size: 0.95rem;
       font-weight: 800;
       cursor: pointer;
       display: flex;
       align-items: center;
       gap: 0.5rem;
       transition: all 0.2s ease;
-      box-shadow: 0 4px 20px rgba(0, 245, 155, 0.35);
+      box-shadow: 0 4px 15px rgba(0, 245, 155, 0.3);
     }
 
     .cut-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(0, 245, 155, 0.45);
+      background: linear-gradient(135deg, #2df7ad 0%, #00d686 100%);
+      transform: translateY(-1px);
     }
 
-    /* Progress & Download Card */
+    .cut-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Progress Card */
     .progress-card {
       display: none;
       background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 18px;
-      padding: 2rem;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-      margin-bottom: 2rem;
+      padding: 1.5rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .progress-title {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
       margin-bottom: 1rem;
     }
@@ -590,17 +712,16 @@
     .progress-bar-wrap {
       width: 100%;
       height: 12px;
-      background: #0e0e10;
+      background: #27272a;
       border-radius: 999px;
       overflow: hidden;
-      margin-bottom: 0.8rem;
-      border: 1px solid var(--card-border);
+      margin-bottom: 0.75rem;
     }
 
     .progress-bar-fill {
-      height: 100%;
       width: 0%;
-      background: linear-gradient(90deg, #9146ff, #00f59b);
+      height: 100%;
+      background: linear-gradient(90deg, #9146ff 0%, #00f59b 100%);
       border-radius: 999px;
       transition: width 0.3s ease;
     }
@@ -608,51 +729,100 @@
     .progress-meta {
       display: flex;
       justify-content: space-between;
+      font-size: 0.85rem;
       color: var(--text-muted);
-      font-size: 0.88rem;
       font-family: var(--font-mono);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .download-btn {
       display: none;
-      margin: 0 auto;
-      background: linear-gradient(135deg, #00f59b 0%, #00c97d 100%);
+      width: 100%;
+      background: linear-gradient(135deg, #00f59b 0%, #00c77d 100%);
       color: #0e0e10;
-      text-decoration: none;
-      padding: 0.9rem 2.5rem;
-      border-radius: 12px;
-      font-size: 1.15rem;
+      text-align: center;
+      padding: 0.95rem;
+      border-radius: 10px;
+      font-size: 1.05rem;
       font-weight: 800;
-      box-shadow: 0 6px 25px rgba(0, 245, 155, 0.4);
-      transition: all 0.2s;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 245, 155, 0.3);
     }
 
     .download-btn:hover {
+      background: linear-gradient(135deg, #2df7ad 0%, #00d686 100%);
       transform: translateY(-2px);
     }
 
-    /* Features Grid */
-    .features-section {
-      margin-top: 3.5rem;
-      border-top: 1px solid var(--card-border);
-      padding-top: 3rem;
+    /* Steps Section */
+    .steps-section {
+      margin-bottom: 3.5rem;
     }
 
-    .section-heading {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
-
-    .section-heading h2 {
-      font-size: 1.85rem;
+    .section-title {
+      font-size: 1.75rem;
       font-weight: 800;
+      text-align: center;
       margin-bottom: 0.5rem;
+      background: linear-gradient(180deg, #ffffff 0%, #adadb8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    .section-heading p {
+    .section-subtitle {
+      text-align: center;
       color: var(--text-muted);
       font-size: 0.95rem;
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .step-card {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      position: relative;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: rgba(145, 70, 255, 0.2);
+      color: #bf94ff;
+      border: 1px solid rgba(145, 70, 255, 0.4);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .step-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Features Section */
+    .features-section {
+      margin-bottom: 3.5rem;
     }
 
     .features-grid {
@@ -664,9 +834,9 @@
     .feature-card {
       background: var(--bg-card);
       border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 1.5rem;
-      transition: transform 0.2s, border-color 0.2s;
+      border-radius: 16px;
+      padding: 1.75rem 1.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
     }
 
     .feature-card:hover {
@@ -675,16 +845,8 @@
     }
 
     .feature-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: rgba(145, 70, 255, 0.15);
-      color: #bf94ff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
+      font-size: 2rem;
+      margin-bottom: 0.85rem;
     }
 
     .feature-card h3 {
@@ -695,24 +857,55 @@
     }
 
     .feature-card p {
-      color: var(--text-muted);
       font-size: 0.88rem;
+      color: var(--text-muted);
       line-height: 1.6;
     }
 
-    /* FAQs */
+    /* FAQ Accordion & Tabs */
     .faq-section {
-      margin-top: 3.5rem;
-      padding-top: 2.5rem;
-      border-top: 1px solid var(--card-border);
+      margin-bottom: 3.5rem;
     }
 
-    .faq-accordion {
-      max-width: 760px;
-      margin: 0 auto;
+    .faq-tabs {
       display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .faq-tab-btn {
+      background: #18181b;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 0.6rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .faq-tab-btn:hover {
+      color: #fff;
+      border-color: rgba(145, 70, 255, 0.5);
+    }
+
+    .faq-tab-btn.active {
+      background: rgba(145, 70, 255, 0.15);
+      border-color: var(--accent);
+      color: #bf94ff;
+    }
+
+    .faq-pane {
+      display: none;
       flex-direction: column;
       gap: 0.75rem;
+    }
+
+    .faq-pane.active {
+      display: flex;
     }
 
     .faq-item {
@@ -720,142 +913,226 @@
       border: 1px solid var(--card-border);
       border-radius: 12px;
       overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(145, 70, 255, 0.35);
     }
 
     .faq-q {
       padding: 1.1rem 1.25rem;
       font-weight: 600;
+      font-size: 0.95rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      color: #fff;
       user-select: none;
+      color: #fff;
     }
 
-    .faq-q:hover {
-      background: var(--bg-card-hover);
+    .faq-q span {
+      font-size: 1.3rem;
+      color: var(--accent);
+      font-weight: 300;
     }
 
     .faq-a {
       display: none;
-      padding: 0 1.25rem 1.1rem 1.25rem;
+      padding: 0 1.25rem 1.1rem;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      border-top: 1px solid rgba(255,255,255,0.03);
+      padding-top: 0.75rem;
+    }
+
+    /* SEO Article Block */
+    .seo-article {
+      background: var(--bg-card);
+      border: 1px solid var(--card-border);
+      border-radius: 18px;
+      padding: 2.25rem 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .seo-article h2 {
+      font-size: 1.55rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .seo-article h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 1.5rem 0 0.5rem;
+      color: #bf94ff;
+    }
+
+    .seo-article p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 0.85rem;
+    }
+
+    .seo-article ul {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
       color: var(--text-muted);
       font-size: 0.92rem;
       line-height: 1.7;
     }
 
+    .seo-article li {
+      margin-bottom: 0.35rem;
+    }
+
+    /* Footer */
     footer {
       border-top: 1px solid var(--card-border);
-      padding: 2.5rem 1.5rem;
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
       background: #09090b;
+      padding: 2.5rem 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 10;
     }
 
-    footer a {
-      color: #bf94ff;
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
       text-decoration: none;
+      font-size: 0.85rem;
+      transition: color 0.15s ease;
     }
 
-    /* Spinner */
-    .spinner {
-      display: inline-block;
-      width: 18px;
-      height: 18px;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: #fff;
-      animation: spin 0.8s linear infinite;
+    .footer-links a:hover {
+      color: #fff;
     }
 
-    @keyframes spin {
-      to { transform: rotate(360deg); }
+    footer p {
+      color: var(--text-muted);
+      font-size: 0.82rem;
     }
 
-    @media (max-width: 650px) {
-      .hero h1 { font-size: 2rem; }
-      .input-wrapper { flex-direction: column; }
-      .fetch-btn { padding: 0.9rem; justify-content: center; }
-      .timestamps-grid { grid-template-columns: 1fr; }
-      .action-row { flex-direction: column; align-items: stretch; }
-      .cut-btn { justify-content: center; }
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .input-wrapper {
+        flex-direction: column;
+      }
+      .fetch-btn {
+        justify-content: center;
+        padding: 0.85rem;
+      }
+      .timestamps-grid {
+        grid-template-columns: 1fr;
+      }
+      .action-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .cut-btn {
+        justify-content: center;
+      }
     }
+
   </style>
 </head>
 <body>
-
   <div class="ambient-glow"></div>
 
-  <header>
+<header>
+  <div style="display:flex; align-items:center; gap: 2rem; flex-wrap: wrap;">
     <a href="/" class="brand">
       <div class="brand-icon">
-        <svg viewBox="0 0 64 64" fill="none">
-          <defs>
-            <linearGradient id="twPurple" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#a970ff"/>
-              <stop offset="100%" stop-color="#9146ff"/>
-            </linearGradient>
-            <linearGradient id="bladeSteel" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="60%" stop-color="#cbd5e1"/>
-              <stop offset="100%" stop-color="#94a3b8"/>
-            </linearGradient>
-            <filter id="cutGlow" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00f59b" flood-opacity="0.8"/>
-            </filter>
-          </defs>
-          <rect width="64" height="64" rx="15" fill="#0e0e10"/>
-          <rect x="1" y="1" width="62" height="62" rx="14" stroke="#9146ff" stroke-width="1.8" stroke-opacity="0.4"/>
-          <!-- Top Half of Sliced Twitch (Shifted Up-Right) -->
-          <g transform="translate(2.2, -3.0)">
-            <path d="M12 10 H48 V19.5 L12 34.5 Z" fill="url(#twPurple)"/>
-            <rect x="21" y="19" width="4.5" height="10" rx="1" fill="#ffffff"/>
-            <path d="M31.5 19 H36 V24.8 L31.5 26.5 Z" fill="#ffffff"/>
-          </g>
-          <!-- Bottom Half of Sliced Twitch (Shifted Down-Left) -->
-          <g transform="translate(-2.2, 3.0)">
-            <path d="M12 35.5 L48 20.5 V30 L38 40 H28 L22 48 V40 H12 Z" fill="url(#twPurple)"/>
-            <rect x="21" y="32" width="4.5" height="2.5" rx="0.8" fill="#ffffff"/>
-            <path d="M31.5 27.8 L36 26.2 V33 H31.5 Z" fill="#ffffff"/>
-          </g>
-          <!-- Glowing Slice Line across the Gap -->
-          <line x1="8" y1="36.5" x2="52" y2="18" stroke="#00f59b" stroke-width="1.4" stroke-dasharray="2.5 2" filter="url(#cutGlow)"/>
-          <!-- Scissor Handles and Blades in the Gap -->
-          <circle cx="53" cy="15" r="5.5" stroke="#ffffff" stroke-width="2.4" fill="#0e0e10"/>
-          <path d="M49 19 L43 24.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
-          <circle cx="53" cy="34" r="5.5" stroke="#ffffff" stroke-width="2.4" fill="#0e0e10"/>
-          <path d="M49 30 L43 25.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
-          <path d="M42 25 L21 31 L23 28.5 L43 23.5 Z" fill="url(#bladeSteel)"/>
-          <path d="M42 25 L21 31" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/>
-          <path d="M42 25 L23 35 L25 37 L43 26.5 Z" fill="url(#bladeSteel)"/>
-          <path d="M42 25 L23 35" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/>
-          <circle cx="43" cy="25" r="3.2" fill="#0e0e10" stroke="#00f59b" stroke-width="1.6"/>
-          <circle cx="43" cy="25" r="1.1" fill="#ffffff"/>
-          <path d="M22 31 L23.5 27.5 L25 31 L28.5 32.5 L25 34 L23.5 37.5 L22 34 L18.5 32.5 Z" fill="#00f59b" filter="url(#cutGlow)"/>
-        </svg>
+        <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="twPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf94ff"/>
+      <stop offset="50%" stop-color="#9146ff"/>
+      <stop offset="100%" stop-color="#6424c9"/>
+    </linearGradient>
+    <linearGradient id="bladeSteel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#cbd5e1"/>
+      <stop offset="100%" stop-color="#94a3b8"/>
+    </linearGradient>
+    <filter id="cutGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.5" flood-color="#00f59b" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="#0e0e10"/>
+  <rect x="1" y="1" width="62" height="62" rx="14" stroke="#9146ff" stroke-width="1.8" stroke-opacity="0.4"/>
+  <g transform="translate(2.2, -3.0)">
+    <path d="M12 10 H48 V19.5 L12 34.5 Z" fill="url(#twPurple)"/>
+    <rect x="21" y="19" width="4.5" height="10" rx="1" fill="#ffffff"/>
+    <path d="M31.5 19 H36 V24.8 L31.5 26.5 Z" fill="#ffffff"/>
+  </g>
+  <g transform="translate(-2.2, 3.0)">
+    <path d="M12 35.5 L48 20.5 V30 L38 40 H28 L22 48 V40 H12 Z" fill="url(#twPurple)"/>
+    <rect x="21" y="32" width="4.5" height="2.5" rx="0.8" fill="#ffffff"/>
+    <path d="M31.5 27.8 L36 26.2 V33 H31.5 Z" fill="#ffffff"/>
+  </g>
+  <line x1="8" y1="36.5" x2="52" y2="18" stroke="#00f59b" stroke-width="1.4" stroke-dasharray="2.5 2" filter="url(#cutGlow)"/>
+  <circle cx="53" cy="15" r="5.5" stroke="#ffffff" stroke-width="2.4" fill="#0e0e10"/>
+  <path d="M49 19 L43 24.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="53" cy="34" r="5.5" stroke="#ffffff" stroke-width="2.4" fill="#0e0e10"/>
+  <path d="M49 30 L43 25.5" stroke="#ffffff" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M42 25 L21 31 L23 28.5 L43 23.5 Z" fill="url(#bladeSteel)"/>
+  <path d="M42 25 L21 31" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M42 25 L23 35 L25 37 L43 26.5 Z" fill="url(#bladeSteel)"/>
+  <path d="M42 25 L23 35" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round"/>
+  <circle cx="43" cy="25" r="3.2" fill="#0e0e10" stroke="#00f59b" stroke-width="1.6"/>
+  <circle cx="43" cy="25" r="1.1" fill="#ffffff"/>
+  <path d="M22 31 L23.5 27.5 L25 31 L28.5 32.5 L25 34 L23.5 37.5 L22 34 L18.5 32.5 Z" fill="#00f59b" filter="url(#cutGlow)"/>
+</svg>
       </div>
       <div class="brand-name">Twitch<span>Cutter</span></div>
     </a>
-    <span class="header-badge">Ultra-Fast Clipper</span>
-  </header>
+    <nav class="nav-links">
+      <a href="/">Home</a>
+      <a href="/twitch-clip-cutter">Clip Cutter</a>
+      <a href="/twitch-vod-downloader">VOD Downloader</a>
+      <a href="/faq">FAQ</a>
+      <a href="/blog/">Guides</a>
+    </nav>
+  </div>
+  <span class="header-badge">Ultra-Fast Clipper</span>
+</header>
 
   <main>
+
     <section class="hero">
-      <div class="hero-pill">⚡ Slices VODs in seconds &bull; No watermark</div>
+      <div class="hero-pill">⚡ Slices VODs in seconds &bull; No watermark &bull; 100% Free</div>
       <h1>Cut Twitch Streams &amp; VODs <br><span class="highlight">By Exact Timestamps</span></h1>
-      <p>Paste any Twitch VOD, clip, or stream link. Visually choose start and end times, and download an original 1080p60 MP4 without downloading giant files.</p>
+      <p>Paste any Twitch VOD, clip, or stream link. Visually choose start and end times, and download an original 1080p60 MP4 without downloading giant 30GB files.</p>
     </section>
 
-    <!-- URL Input Card -->
+    <!-- Input Card -->
     <div class="input-card">
       <div class="input-wrapper">
         <input 
           type="text" 
           id="urlInput" 
           class="url-input" 
-          placeholder="Paste Twitch URL (e.g. https://www.twitch.tv/videos/12345678 or channel name)..."
+          placeholder="Paste Twitch URL (e.g. https://www.twitch.tv/videos/12345678 or clip link)..."
           autocomplete="off"
         >
         <button id="fetchBtn" class="fetch-btn" onclick="handleFetch()">
@@ -867,6 +1144,7 @@
         <span>Try sample:</span>
         <span class="example-tag" onclick="loadSample('https://www.twitch.tv/eslcs')">ESLCS Channel</span>
         <span class="example-tag" onclick="loadSample('https://www.twitch.tv/shroud')">Shroud Stream</span>
+        <span class="example-tag" onclick="loadSample('https://www.twitch.tv/tarik')">Tarik Stream</span>
       </div>
     </div>
 
@@ -939,6 +1217,16 @@
           </div>
         </div>
 
+        <!-- Quick Length Shortcuts -->
+        <div style="display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap; align-items:center;">
+          <span style="font-size:0.8rem; color:var(--text-muted);">Quick Add:</span>
+          <button class="nudge-btn" onclick="quickAdd(30)">+30s</button>
+          <button class="nudge-btn" onclick="quickAdd(60)">+1 Min</button>
+          <button class="nudge-btn" onclick="quickAdd(180)">+3 Min</button>
+          <button class="nudge-btn" onclick="quickAdd(300)">+5 Min</button>
+          <button class="nudge-btn" onclick="quickAdd(600)">+10 Min</button>
+        </div>
+
         <!-- Action & Quality Row -->
         <div class="action-row">
           <div class="quality-select-wrapper">
@@ -974,75 +1262,205 @@
       </a>
     </div>
 
-    <!-- Features Section -->
-    <section class="features-section">
-      <div class="section-heading">
-        <h2>Why Use TwitchCutter?</h2>
-        <p>Built for gaming editors, content creators, and esports highlight channels.</p>
+
+    <!-- How It Works Section -->
+    <section class="steps-section">
+      <h2 class="section-title">How to Cut &amp; Download Twitch VODs in 3 Steps</h2>
+      <p class="section-subtitle">No software, no heavy downloads, no complicated setup. Just paste, select timestamps, and download.</p>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <h3>Paste Twitch URL</h3>
+          <p>Copy the link of any public Twitch VOD, livestream, or clip and click <strong>Fetch Stream</strong>. The video info, live player preview, and available resolutions load immediately.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <h3>Set Clip Timestamps</h3>
+          <p>Drag the dual range scrubber or type exact start and end times (e.g. 01:15:00 to 01:18:30). Use the nudge buttons or quick add shortcuts (+1 min, +5 min) to fine-tune.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <h3>Export 1080p MP4</h3>
+          <p>Click <strong>Cut &amp; Download Clip</strong>. Our cloud engine slices only your selected stream segments — saving your bandwidth and hard drive space. Zero watermark.</p>
+        </div>
       </div>
+    </section>
+
+    <!-- Why TwitchCutter Features -->
+    <section class="features-section">
+      <h2 class="section-title">Why TwitchCutter Is the Best Twitch VOD &amp; Clip Cutter</h2>
+      <p class="section-subtitle">Engineered specifically for esports editors, YouTube Shorts creators, and Twitch fans.</p>
 
       <div class="features-grid">
         <div class="feature-card">
           <div class="feature-icon">⏱️</div>
-          <h3>No 60-Second Limit</h3>
-          <p>Twitch clips are capped at 60s. With TwitchCutter, cut clips anywhere from 5 seconds to 2 hours with no restrictions.</p>
+          <h3>Break the 60-Second Limit</h3>
+          <p>Twitch's native clipping button limits you to 60 seconds. TwitchCutter lets you cut clips of any length — 2 minutes, 10 minutes, or even a full 2-hour tournament match.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon">🚀</div>
-          <h3>Zero 30GB VOD Downloads</h3>
-          <p>Never download multi-hour 30GB VOD files just to get a 2-minute moment. Our cloud slicer extracts only the exact seconds you need.</p>
+          <h3>Server-Side Stream Slicing</h3>
+          <p>Never download a 30 GB 10-hour VOD just to get a 30-second funny moment. Our backend downloads and splices only the exact chunks you request.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon">✨</div>
           <h3>100% Watermark Free</h3>
-          <p>All trimmed MP4 videos are completely clean with no logos, watermarks, or credit overlays, ready for TikTok, Shorts, and Premiere.</p>
+          <p>Get clean, pristine MP4 video files ready to edit in Premiere Pro, DaVinci Resolve, or upload straight to TikTok and YouTube Shorts.</p>
         </div>
-
         <div class="feature-card">
           <div class="feature-icon">🎯</div>
           <h3>1080p60 Source Quality</h3>
-          <p>Download directly at the streamer's original broadcast bitrate and 60 FPS framerate with crystal clear game audio.</p>
+          <p>Preserve high-framerate gameplay. If the streamer broadcasted in 1080p at 60 FPS, your output clip will match that exact crystal-clear quality.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Works on iPhone &amp; Android</h3>
+          <p>No desktop apps or FFmpeg commands needed. TwitchCutter runs smoothly directly inside mobile Safari, Chrome, and desktop browsers.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>No Account &amp; No Login</h3>
+          <p>Zero friction. You do not need to link your Twitch account or enter any login credentials. Just paste and cut instantly.</p>
         </div>
       </div>
     </section>
 
-    <!-- FAQs -->
+    <!-- Categorized FAQ Section -->
     <section class="faq-section">
-      <div class="section-heading">
-        <h2>Frequently Asked Questions</h2>
-        <p>Everything you need to know about cutting Twitch VODs and clips.</p>
+      <h2 class="section-title">Twitch VOD &amp; Clip Cutter — FAQ</h2>
+      <p class="section-subtitle">Common questions about cutting Twitch VODs, downloading clips, and saving past broadcasts.</p>
+
+      <div class="faq-tabs">
+        <button class="faq-tab-btn active" onclick="switchFaqTab('tab-cutter', this)">✂️ Cutting &amp; Trimming</button>
+        <button class="faq-tab-btn" onclick="switchFaqTab('tab-downloader', this)">📥 VOD Downloading</button>
+        <button class="faq-tab-btn" onclick="switchFaqTab('tab-tech', this)">⚙️ Quality &amp; Tech</button>
+        <button class="faq-tab-btn" onclick="switchFaqTab('tab-privacy', this)">🔒 Legal &amp; DMCA</button>
       </div>
 
-      <div class="faq-accordion">
+      <!-- Tab 1: Cutting & Trimming -->
+      <div id="tab-cutter" class="faq-pane active">
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">Can I cut clips longer than 60 seconds? <span>+</span></div>
-          <div class="faq-a">Yes! Twitch's native clipping tool strictly limits clips to 60 seconds max. TwitchCutter allows you to choose any custom timeframe up to 2 hours in duration.</div>
+          <div class="faq-q" onclick="toggleFaq(this)">How do I download part of a Twitch VOD? <span>+</span></div>
+          <div class="faq-a">To download part of a Twitch VOD: (1) Copy the Twitch VOD URL and paste it into TwitchCutter. (2) Click Fetch Stream. (3) Set your start and end timestamps using the slider or type them in. (4) Click Cut &amp; Download Clip. Only that selected portion is sliced and exported as an MP4.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">Do I need to install FFmpeg or any software? <span>+</span></div>
-          <div class="faq-a">No installation required. All stream segment fetching and FFmpeg stream-copy splicing happen entirely on our high-speed cloud servers.</div>
+          <div class="faq-q" onclick="toggleFaq(this)">Can I clip longer than 60 seconds on Twitch? <span>+</span></div>
+          <div class="faq-a">Yes! Twitch's native clip creator limits clips to a maximum of 60 seconds. TwitchCutter removes this limitation entirely, letting you slice any length from 5 seconds up to 2 hours from any public VOD.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">Does it work on mobile phones? <span>+</span></div>
-          <div class="faq-a">Yes, TwitchCutter is fully responsive and runs seamlessly on iPhone (Safari) and Android (Chrome).</div>
+          <div class="faq-q" onclick="toggleFaq(this)">Can I cut a Twitch VOD without downloading the full video? <span>+</span></div>
+          <div class="faq-a">Yes, that is TwitchCutter's core superpower. Because 8-hour Twitch VODs can exceed 25–40 GB, downloading the whole file is painful. Our cloud server extracts only the HLS segments matching your start and end times, saving your bandwidth and time.</div>
         </div>
         <div class="faq-item">
-          <div class="faq-q" onclick="toggleFaq(this)">Is TwitchCutter free to use? <span>+</span></div>
-          <div class="faq-a">Yes, TwitchCutter is 100% free with no hidden fees, subscriptions, or watermarks.</div>
+          <div class="faq-q" onclick="toggleFaq(this)">How do I trim a Twitch stream online? <span>+</span></div>
+          <div class="faq-a">TwitchCutter is a free online Twitch stream trimmer. Open TwitchCutter in your browser, enter the broadcast link, use the interactive dual slider to set your in and out points, and download your trimmed clip as an MP4.</div>
         </div>
       </div>
+
+      <!-- Tab 2: VOD Downloading -->
+      <div id="tab-downloader" class="faq-pane">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How long do Twitch VODs last before getting deleted? <span>+</span></div>
+          <div class="faq-a">Twitch VOD expiration periods are: Standard streamers: 7 days. Twitch Affiliates: 14 days. Twitch Partners, Turbo, and Prime members: 60 days. Once expired, Twitch permanently deletes past broadcasts. Use TwitchCutter to save your favorite streams before they disappear!</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">How do I download a Twitch VOD? <span>+</span></div>
+          <div class="faq-a">Paste the Twitch VOD link into TwitchCutter and click Fetch Stream. Set the start timestamp to 00:00:00 and the end timestamp to the full duration of the stream, pick your resolution (1080p, 720p), and click Cut &amp; Download Clip.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Can I download someone else's Twitch VOD? <span>+</span></div>
+          <div class="faq-a">Yes, you can download clips or segments from any public Twitch VOD or stream. Note that subscriber-only VODs require channel subscription credentials and are not publicly scrapable.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Do Twitch clips expire like VODs do? <span>+</span></div>
+          <div class="faq-a">No, Twitch clips do not automatically expire like VODs do. However, streamers can manually delete clips or delete the source VOD, which can occasionally orphan clips. Saving them as local MP4 files guarantees you never lose them.</div>
+        </div>
+      </div>
+
+      <!-- Tab 3: Tech & Quality -->
+      <div id="tab-tech" class="faq-pane">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Can I download Twitch clips in 1080p 60FPS? <span>+</span></div>
+          <div class="faq-a">Yes! TwitchCutter automatically queries all broadcast resolutions provided by Twitch's HLS streams. You can download clips in 1080p60 Full HD, 720p60 HD, 480p, or 360p.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">What video format does TwitchCutter export? <span>+</span></div>
+          <div class="faq-a">All clips are packaged in universal H.264 MP4 format with AAC audio. This ensures instant compatibility with Windows, Mac, iOS, Android, DaVinci Resolve, Adobe Premiere Pro, and CapCut.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Do I need to install FFmpeg, Python, or extensions? <span>+</span></div>
+          <div class="faq-a">No. All stream slicing, FFmpeg processing, and packaging happen remotely in our high-speed cloud infrastructure. You just click download.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Does TwitchCutter work on mobile phones? <span>+</span></div>
+          <div class="faq-a">Yes! TwitchCutter is designed to be mobile-first and responsive. You can paste a Twitch link in mobile Safari on iPhone or Chrome on Android and save MP4 clips straight to your device gallery.</div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Legal & DMCA -->
+      <div id="tab-privacy" class="faq-pane">
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is TwitchCutter legal to use? <span>+</span></div>
+          <div class="faq-a">Yes. Using TwitchCutter to create clips and save moments for personal archiving or fair-use commentary and transformative editing is generally acceptable. Always respect streamers' intellectual property and credit original creators when reposting content.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Why are parts of some Twitch VODs muted? <span>+</span></div>
+          <div class="faq-a">Twitch has an automated Audible Magic system that scans streams for copyrighted music and mutes offending audio sections in the VOD. If a section is muted on Twitch, any downloaded clip of that section will also be muted because the source audio was permanently stripped.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">Is TwitchCutter affiliated with Twitch.tv or Amazon? <span>+</span></div>
+          <div class="faq-a">No. TwitchCutter is an independent open-source web application designed for gaming editors and fans. It is not affiliated with, endorsed by, or sponsored by Twitch Interactive, Inc. or Amazon.com.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Content Section -->
+    <section class="seo-article">
+      <h2>Free Online Twitch VOD Cutter &amp; Clip Downloader</h2>
+      <p>
+        <strong>TwitchCutter</strong> is the ultimate free online utility for gamers, esports video editors, and content creators looking to <strong>cut Twitch VODs by timestamp</strong> and <strong>download Twitch clips without watermarks</strong>. Whether you need a 15-second clutch moment for TikTok, a 2-minute tournament highlight for YouTube Shorts, or want to archive a full past broadcast before it gets deleted, TwitchCutter makes it seamless and lightning fast.
+      </p>
+
+      <h3>Why Use a Dedicated Twitch VOD Cutter?</h3>
+      <p>
+        Twitch livestreams frequently last between 6 and 12 hours. A standard high-bitrate 1080p60 broadcast can easily result in a raw video file exceeding <strong>20 GB to 40 GB</strong>. Downloading an entire broadcast just to edit a single two-minute highlight is a massive waste of bandwidth, time, and hard drive space.
+      </p>
+      <p>
+        TwitchCutter solves this problem with <strong>server-side stream slicing</strong>. When you input your desired start and end timestamps (for example, from <code>01:23:45</code> to <code>01:26:10</code>), our cloud backend queries the exact HLS video segments and splices only those seconds into a pristine MP4 file. You download only the file you actually need.
+      </p>
+
+      <h3>How to Clip Longer Than 60 Seconds on Twitch</h3>
+      <p>
+        Twitch's built-in clip button has a hard restriction: clips cannot exceed <strong>60 seconds</strong>. For esports highlights, funny team comms, or lengthy story times, 60 seconds is rarely enough. TwitchCutter allows creators to bypass this limitation completely. Simply paste the VOD URL and specify any duration — from 5 seconds to over 2 hours — and download the full uncut moment in source 1080p resolution.
+      </p>
+
+      <h3>The Modern Untwitch Alternative</h3>
+      <p>
+        For years, users relied on older utilities like Untwitch to download stream segments. However, older tools frequently suffer from 1-hour length caps, intrusive advertisements, slow queue times, and a lack of interactive video player previews. TwitchCutter was built from the ground up as a modern alternative, featuring a real-time HLS video preview player, dual range scrubber, and zero artificial length limits.
+      </p>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2026 TwitchCutter &bull; Fast, Free &amp; Open Source Online Video Clipper for Twitch.tv.</p>
-    <p style="margin-top: 0.4rem; font-size: 0.75rem; color: #64748b;">Disclaimer: TwitchCutter is an independent tool and is not affiliated with, endorsed by, or sponsored by Twitch Interactive, Inc. or Amazon.</p>
-  </footer>
+<footer>
+  <div class="footer-links">
+    <a href="/">Home</a>
+    <a href="/twitch-clip-cutter">Twitch Clip Cutter</a>
+    <a href="/twitch-vod-downloader">Twitch VOD Downloader</a>
+    <a href="/faq">FAQ</a>
+    <a href="/blog/">Guides &amp; Tutorials</a>
+    <a href="/about">About</a>
+    <a href="/privacy">Privacy Policy</a>
+    <a href="/terms">Terms &amp; DMCA</a>
+    <a href="/contact">Contact Support</a>
+    <a href="https://github.com/shubhamsain850-droid/twitchcutter" target="_blank" rel="noopener">GitHub</a>
+  </div>
+  <p style="margin-bottom:0.4rem;">&copy; 2026 TwitchCutter &bull; Fast, Free &amp; Open Source Online Video Clipper &amp; VOD Downloader for Twitch.tv.</p>
+  <p style="font-size:0.75rem; color:#64748b;">Disclaimer: TwitchCutter is an independent open-source tool and is not affiliated with, endorsed by, or sponsored by Twitch Interactive, Inc. or Amazon.</p>
+</footer>
 
   <script>
-    // API endpoint: point to local backend if developing locally, or active Hugging Face API
+
     const API = window.location.origin.includes("localhost") || window.location.origin.includes("127.0.0.1")
       ? "http://127.0.0.1:7860"
       : "https://shubhamsain858-kickcuttr-api.hf.space";
@@ -1052,9 +1470,12 @@
     let activeJobId = null;
     let pollInterval = null;
 
-    function loadSample(url) {
-      document.getElementById('urlInput').value = url;
-      handleFetch();
+    function switchFaqTab(tabId, btn) {
+      document.querySelectorAll('.faq-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.faq-pane').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const pane = document.getElementById(tabId);
+      if (pane) pane.classList.add('active');
     }
 
     function toggleFaq(el) {
@@ -1067,6 +1488,11 @@
         a.style.display = 'block';
         span.textContent = '−';
       }
+    }
+
+    function loadSample(url) {
+      document.getElementById('urlInput').value = url;
+      handleFetch();
     }
 
     function timeToSec(t) {
@@ -1085,7 +1511,6 @@
       return `${String(m).padStart(2, '0')}:${String(sec).padStart(2, '0')}`;
     }
 
-    // Slider & Controls Sync
     const rangeStart = document.getElementById('rangeStart');
     const rangeEnd = document.getElementById('rangeEnd');
     const sliderHighlight = document.getElementById('sliderHighlight');
@@ -1095,6 +1520,7 @@
     const previewVideo = document.getElementById('previewVideo');
 
     function updateSliderUi() {
+      if (!rangeStart || !rangeEnd) return;
       const max = Number(rangeEnd.max) || totalVideoDuration;
       let sVal = Number(rangeStart.value);
       let eVal = Number(rangeEnd.value);
@@ -1111,87 +1537,112 @@
       const leftPct = (sVal / max) * 100;
       const rightPct = 100 - (eVal / max) * 100;
 
-      sliderHighlight.style.left = `${leftPct}%`;
-      sliderHighlight.style.right = `${rightPct}%`;
+      if (sliderHighlight) {
+        sliderHighlight.style.left = `${leftPct}%`;
+        sliderHighlight.style.right = `${rightPct}%`;
+      }
 
       const startFormatted = secToTime(sVal);
       const endFormatted = secToTime(eVal);
 
-      startTimeInput.value = startFormatted;
-      endTimeInput.value = endFormatted;
+      if (startTimeInput) startTimeInput.value = startFormatted;
+      if (endTimeInput) endTimeInput.value = endFormatted;
 
       const clipSec = Math.max(0, eVal - sVal);
-      selectedDurationBadge.textContent = `${startFormatted} ➔ ${endFormatted} (${clipSec}s)`;
-      document.getElementById('sliderLabelStart').textContent = startFormatted;
-      document.getElementById('sliderLabelEnd').textContent = endFormatted;
+      if (selectedDurationBadge) {
+        selectedDurationBadge.textContent = `${startFormatted} ➔ ${endFormatted} (${clipSec}s)`;
+      }
+      const labelS = document.getElementById('sliderLabelStart');
+      const labelE = document.getElementById('sliderLabelEnd');
+      if (labelS) labelS.textContent = startFormatted;
+      if (labelE) labelE.textContent = endFormatted;
     }
 
-    rangeStart.addEventListener('input', () => {
-      let sVal = Number(rangeStart.value);
-      let eVal = Number(rangeEnd.value);
-      if (sVal >= eVal) {
-        sVal = Math.max(0, eVal - 1);
-        rangeStart.value = sVal;
-      }
-      updateSliderUi();
-      if (previewVideo) previewVideo.currentTime = sVal;
-    });
-
-    rangeEnd.addEventListener('input', () => {
-      let sVal = Number(rangeStart.value);
-      let eVal = Number(rangeEnd.value);
-      if (eVal <= sVal) {
-        eVal = Math.min(Number(rangeEnd.max), sVal + 1);
-        rangeEnd.value = eVal;
-      }
-      updateSliderUi();
-    });
-
-    startTimeInput.addEventListener('change', () => {
-      let sVal = timeToSec(startTimeInput.value);
-      let eVal = Number(rangeEnd.value);
-      if (sVal >= eVal) sVal = Math.max(0, eVal - 1);
-      rangeStart.value = sVal;
-      updateSliderUi();
-      if (previewVideo) previewVideo.currentTime = sVal;
-    });
-
-    endTimeInput.addEventListener('change', () => {
-      let eVal = timeToSec(endTimeInput.value);
-      let sVal = Number(rangeStart.value);
-      let max = Number(rangeEnd.max);
-      if (eVal <= sVal) eVal = Math.min(max, sVal + 1);
-      rangeEnd.value = eVal;
-      updateSliderUi();
-    });
-
-    function nudgeTime(type, delta) {
-      if (type === 'start') {
-        const cur = Number(rangeStart.value) || 0;
-        const eVal = Number(rangeEnd.value) || 60;
-        let nextVal = Math.max(0, Math.min(eVal - 1, cur + delta));
-        rangeStart.value = nextVal;
+    if (rangeStart && rangeEnd) {
+      rangeStart.addEventListener('input', () => {
+        let sVal = Number(rangeStart.value);
+        let eVal = Number(rangeEnd.value);
+        if (sVal >= eVal) {
+          sVal = Math.max(0, eVal - 1);
+          rangeStart.value = sVal;
+        }
         updateSliderUi();
-        if (previewVideo) previewVideo.currentTime = nextVal;
+        if (previewVideo) previewVideo.currentTime = sVal;
+      });
+
+      rangeEnd.addEventListener('input', () => {
+        let sVal = Number(rangeStart.value);
+        let eVal = Number(rangeEnd.value);
+        if (eVal <= sVal) {
+          eVal = Math.min(Number(rangeEnd.max), sVal + 1);
+          rangeEnd.value = eVal;
+        }
+        updateSliderUi();
+      });
+    }
+
+    if (startTimeInput) {
+      startTimeInput.addEventListener('change', () => {
+        const sec = timeToSec(startTimeInput.value);
+        if (rangeStart) rangeStart.value = Math.min(sec, Number(rangeEnd.value) - 1);
+        updateSliderUi();
+      });
+    }
+
+    if (endTimeInput) {
+      endTimeInput.addEventListener('change', () => {
+        const sec = timeToSec(endTimeInput.value);
+        if (rangeEnd) rangeEnd.value = Math.max(sec, Number(rangeStart.value) + 1);
+        updateSliderUi();
+      });
+    }
+
+    function nudgeTime(which, delta) {
+      if (which === 'start') {
+        let cur = timeToSec(startTimeInput.value) + delta;
+        cur = Math.max(0, Math.min(cur, timeToSec(endTimeInput.value) - 1));
+        if (rangeStart) rangeStart.value = cur;
+        if (previewVideo) previewVideo.currentTime = cur;
       } else {
-        const max = Number(rangeEnd.max) || 3600;
-        const cur = Number(rangeEnd.value) || 60;
-        const sVal = Number(rangeStart.value) || 0;
-        let nextVal = Math.min(max, Math.max(sVal + 1, cur + delta));
-        rangeEnd.value = nextVal;
-        updateSliderUi();
+        let cur = timeToSec(endTimeInput.value) + delta;
+        cur = Math.min(totalVideoDuration, Math.max(cur, timeToSec(startTimeInput.value) + 1));
+        if (rangeEnd) rangeEnd.value = cur;
       }
+      updateSliderUi();
     }
 
-    // Fetch Stream Info
+    function quickAdd(seconds) {
+      const curStart = timeToSec(startTimeInput.value);
+      const newEnd = Math.min(totalVideoDuration, curStart + seconds);
+      if (rangeEnd) rangeEnd.value = newEnd;
+      updateSliderUi();
+    }
+
+    function showSpinner() {
+      const ov = document.getElementById('videoLoadingOverlay');
+      if (ov) ov.style.display = 'flex';
+    }
+
+    function hideSpinner() {
+      const ov = document.getElementById('videoLoadingOverlay');
+      if (ov) ov.style.display = 'none';
+    }
+
     async function handleFetch() {
-      const url = document.getElementById('urlInput').value.trim();
-      if (!url) return alert('Please enter a Twitch URL');
+      const input = document.getElementById('urlInput');
+      const url = input.value.trim();
+      if (!url) {
+        alert('Please enter a valid Twitch stream, VOD, or clip URL.');
+        return;
+      }
 
       const fetchBtn = document.getElementById('fetchBtn');
       const fetchBtnText = document.getElementById('fetchBtnText');
       fetchBtn.disabled = true;
-      fetchBtnText.innerHTML = '<span class="spinner"></span> Fetching...';
+      fetchBtnText.textContent = 'Fetching...';
+
+      const playerCard = document.getElementById('playerCard');
+      showSpinner();
 
       try {
         const resp = await fetch(`${API}/info`, {
@@ -1202,52 +1653,46 @@
         const data = await resp.json();
 
         if (resp.ok && data.success) {
-          document.getElementById('videoTitle').textContent = data.title;
-          document.getElementById('videoCreator').textContent = data.uploader;
-          document.getElementById('videoDuration').textContent = data.duration_str;
+          playerCard.style.display = 'block';
 
-          const typeBadge = document.getElementById('videoTypeBadge');
+          document.getElementById('videoTitle').textContent = data.title || 'Twitch Stream';
+          document.getElementById('videoCreator').textContent = data.uploader || 'Twitch Channel';
+
+          totalVideoDuration = data.duration_seconds || 3600;
+          document.getElementById('videoDuration').textContent = secToTime(totalVideoDuration);
+
+          const badge = document.getElementById('videoTypeBadge');
           if (data.is_live) {
-            typeBadge.className = 'badge-live';
-            typeBadge.textContent = '🔴 LIVE';
+            badge.textContent = '🔴 LIVE';
+            badge.style.background = 'rgba(235, 4, 0, 0.2)';
+            badge.style.color = '#ff6b6b';
           } else {
-            typeBadge.className = 'badge-vod';
-            typeBadge.textContent = '📼 VOD';
+            badge.textContent = '📼 VOD';
+            badge.style.background = '#27272a';
+            badge.style.color = '#e4e4e7';
           }
 
-          // Populate resolutions dropdown
+          if (rangeStart && rangeEnd) {
+            rangeStart.max = totalVideoDuration;
+            rangeEnd.max = totalVideoDuration;
+            rangeStart.value = 0;
+            const initialClip = Math.min(60, totalVideoDuration);
+            rangeEnd.value = initialClip;
+            updateSliderUi();
+          }
+
           const qSelect = document.getElementById('qualitySelect');
-          if (data.available_resolutions && data.available_resolutions.length > 0) {
+          if (qSelect && data.formats && data.formats.length > 0) {
             qSelect.innerHTML = '';
-            data.available_resolutions.forEach(res => {
+            data.formats.forEach(f => {
               const opt = document.createElement('option');
-              opt.value = res.id;
-              opt.textContent = res.label;
+              opt.value = f.format_id;
+              opt.textContent = `${f.format_note || f.resolution} (${f.ext})`;
               qSelect.appendChild(opt);
             });
           }
 
-          // Configure sliders
-          const dur = data.duration > 0 ? data.duration : 3600;
-          totalVideoDuration = dur;
-          rangeStart.max = dur;
-          rangeEnd.max = dur;
-          rangeStart.value = 0;
-          rangeEnd.value = Math.min(dur, 60);
-          updateSliderUi();
-
-          // Show Player Card
-          const playerCard = document.getElementById('playerCard');
-          playerCard.style.display = 'block';
-
-          // Load Stream Preview
-          const overlay = document.getElementById('videoLoadingOverlay');
-          if (overlay) overlay.style.display = 'flex';
-          const hideSpinner = () => { if (overlay) overlay.style.display = 'none'; };
-
-          if (data.thumbnail) previewVideo.poster = data.thumbnail;
-
-          if (data.preview_url) {
+          if (data.preview_url && previewVideo) {
             if (hlsInstance) {
               hlsInstance.destroy();
               hlsInstance = null;
@@ -1271,16 +1716,17 @@
           playerCard.scrollIntoView({ behavior: 'smooth' });
         } else {
           alert(data.detail || data.error || 'Failed to fetch Twitch stream. Please check the URL.');
+          hideSpinner();
         }
       } catch (err) {
-        alert('Network error connecting to API server: ' + err.message);
+        alert('Network error connecting to backend API: ' + err.message);
+        hideSpinner();
       } finally {
         fetchBtn.disabled = false;
         fetchBtnText.textContent = 'Fetch Stream';
       }
     }
 
-    // Start Video Clipping Job
     async function startClipping() {
       const url = document.getElementById('urlInput').value.trim();
       const start = document.getElementById('startTime').value.trim();
@@ -1346,7 +1792,8 @@
               dl.href = `${API}${data.download_url}`;
               const size = (data.meta && data.meta.size_mb) || data.size_mb || '';
               if (size) {
-                document.getElementById('downloadSize').textContent = `${size} MB`;
+                const sEl = document.getElementById('downloadSize');
+                if (sEl) sEl.textContent = `${size} MB`;
               }
               dl.style.display = 'inline-block';
             } else if (data.status === 'error') {
@@ -1358,8 +1805,9 @@
         } catch (e) {
           console.error('Polling error:', e);
         }
-      }, 1500);
+      } , 1500);
     }
+
   </script>
 </body>
 </html>
