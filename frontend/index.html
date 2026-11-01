@@ -7,6 +7,12 @@
   <meta name="description" content="Cut, trim, and download Twitch VODs, livestreams, and clips online without watermarks. Choose exact timestamps, select 1080p60 Full HD quality, and download in seconds.">
   <meta name="keywords" content="twitch cutter, cut twitch vod, twitch clip cutter, trim twitch vod, download part of twitch vod, twitch vod downloader">
 
+  <!-- Favicon & Brand Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2">
+  <link rel="shortcut icon" href="/favicon.ico?v=2">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
+
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="TwitchCutter — Free Online Twitch VOD Clipper &amp; Stream Cutter">
@@ -88,20 +94,19 @@
     }
 
     .brand-icon {
-      width: 38px;
-      height: 38px;
-      background: linear-gradient(135deg, #9146ff, #5c16c5);
+      width: 42px;
+      height: 42px;
+      background: transparent;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 15px var(--accent-glow);
+      filter: drop-shadow(0 4px 12px var(--accent-glow));
     }
 
     .brand-icon svg {
-      width: 22px;
-      height: 22px;
-      fill: #fff;
+      width: 40px;
+      height: 40px;
     }
 
     .brand-name {
@@ -786,8 +791,34 @@
   <header>
     <a href="/" class="brand">
       <div class="brand-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z"/>
+        <svg viewBox="0 0 64 64" fill="none">
+          <defs>
+            <linearGradient id="twPurple" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#bf94ff"/>
+              <stop offset="50%" stop-color="#9146ff"/>
+              <stop offset="100%" stop-color="#6441a5"/>
+            </linearGradient>
+            <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="60%" stop-color="#d8b4fe"/>
+              <stop offset="100%" stop-color="#9146ff"/>
+            </linearGradient>
+          </defs>
+          <rect width="64" height="64" rx="14" fill="#0e0e10"/>
+          <rect x="1" y="1" width="62" height="62" rx="13" stroke="#9146ff" stroke-width="2" stroke-opacity="0.5"/>
+          <path d="M12 24C12 18.5 16.5 14 22 14C27.5 14 31 18.5 30 24L26 27C24.5 28.5 22 28.5 19 28L15 27C13 26.5 12 25.5 12 24Z" fill="url(#twPurple)"/>
+          <circle cx="21" cy="21" r="3.5" fill="#0e0e10"/>
+          <path d="M12 40C12 45.5 16.5 50 22 50C27.5 50 31 45.5 30 40L26 37C24.5 35.5 22 35.5 19 36L15 37C13 37.5 12 38.5 12 40Z" fill="url(#twPurple)"/>
+          <circle cx="21" cy="43" r="3.5" fill="#0e0e10"/>
+          <rect x="15" y="28" width="3" height="8" rx="1" fill="#ffffff"/>
+          <rect x="21" y="28" width="3" height="8" rx="1" fill="#ffffff"/>
+          <path d="M28 35L52 14C53.5 12.5 55 14 54 16L42 30L33 36Z" fill="url(#bladeGrad)"/>
+          <path d="M28 35L52 14" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+          <path d="M28 29L52 50C53.5 51.5 55 50 54 48L42 34L33 28Z" fill="url(#bladeGrad)"/>
+          <path d="M28 29L52 50" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+          <circle cx="29" cy="32" r="4.5" fill="#0e0e10" stroke="#9146ff" stroke-width="2.2"/>
+          <circle cx="29" cy="32" r="1.8" fill="#ffffff"/>
+          <path d="M51 32L53 29L55 32L58 32L55.5 34L56.5 37L54 35L51.5 37L52.5 34L50 32Z" fill="#00f59b"/>
         </svg>
       </div>
       <div class="brand-name">Twitch<span>Cutter</span></div>
